@@ -124,7 +124,7 @@ def sample_text2video(model, prompt, n_samples, batch_size,
         else:
             all_videos.append(torch_to_np(samples))
     
-    all_videos = np.concatenate(all_videos, axis=0) # nthwc
+    all_videos = np.concatenate(all_videos, axis=0)
     assert(all_videos.shape[0] >= n_samples)
     return all_videos
 
@@ -175,6 +175,7 @@ def main():
         gpu_id = None
     else:
         gpu_id = opt.gpu_id
+        os.environ["CUDA_VISIBLE_DEVICES"] = f"{gpu_id}"
     
     # set random seed
     if opt.seed is not None:
@@ -196,7 +197,11 @@ def main():
     print("config: \n", config)
 
     # get model & sampler
-    model, _, _ = load_model(config, opt.ckpt_path, gpu_id, opt.inject_lora, opt.lora_scale, opt.lora_path)
+    model, _, _ = load_model(config, opt.ckpt_path, 
+                             inject_lora=opt.inject_lora, 
+                             lora_scale=opt.lora_scale, 
+                             lora_path=opt.lora_path
+                             )
     ddim_sampler = DDIMSampler(model) if opt.sample_type == "ddim" else None
 
     # prepare prompt

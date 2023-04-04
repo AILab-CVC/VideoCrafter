@@ -3,7 +3,7 @@ PROMPT="astronaut riding a horse" # OR: PROMPT="input/prompts.txt" for sampling 
 OUTDIR="results/"
 
 BASE_PATH="models/base_t2v/model.ckpt"
-CONFIG_PATH="models/base_t2v/model_config.ckpt"
+CONFIG_PATH="models/base_t2v/model_config.yaml"
 
 python scripts/sample_text2video.py \
     --ckpt_path $BASE_PATH \
