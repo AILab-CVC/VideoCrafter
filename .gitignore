@@ -4,3 +4,4 @@ __pycache__
 *.egg-info
 
 results
+*.ckpt
