@@ -1,4 +1,4 @@
-# VideoCrafter：a Toolkit for Text-to-video Generation and Editing 
+# VideoCrafter：A Toolkit for Text-to-video Generation and Editing 
 
 ### 1. Base Model: Generic Text-to-video Generation
 
