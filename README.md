@@ -221,16 +221,21 @@ python scripts/sample_text2video.py \
 <br>
 
 ### Difference LoRA scales
+The effect of LoRA weights can be controlled by the `lora_scale`. `local_scale=0` indicates using the original base model, while `local_scale=1` indicates using the full lora weights. It can also be slightly larger than 1 to emphasize more effect from lora.
+
 <table class="center">
-  <td style="text-align:center;" width="170">xxx</td>
-  <td style="text-align:center;" width="170">xxx</td>
-  <td style="text-align:center;" width="170">xxx</td>
-  <!-- <td style="text-align:center;" width="170">xxx</td> -->
+  <td style="text-align:center;" width="170">scale=0.0</td>
+  <td style="text-align:center;" width="170">scale=0.25</td>
+  <td style="text-align:center;" width="170">scale=0.5</td>
   <tr>
   <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale0.gif width="170"></td>
   <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale0.25.gif width="170"></td>
   <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale0.5.gif width="170"></td>
   </tr>
+  <td style="text-align:center;" width="170">scale=0.75</td>
+  <td style="text-align:center;" width="170">scale=1.0</td>
+  <td style="text-align:center;" width="170">scale=1.5</td>
+  <tr>
   <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale0.75.gif width="170"></td>
   <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale1.0.gif width="170"></td>
   <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale1.5.gif width="170"></td>
