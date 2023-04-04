@@ -204,7 +204,7 @@ pip install av moviepy
 </details>
 
 ### 3. VideoControl
-⏳⏳⏳ Comming soon. Please stay tuned!
+⏳⏳⏳ Comming soon. Please stay tuned!🤗
 
 <br>
 
