@@ -6,15 +6,15 @@
 🤗🤗🤗 VideoCrafter is an open-source video generation and editing toolbox for crafting video content.   
 It currently includes the following THREE types of models:
 
-### 1. LV Diffusion: Generic Text-to-video Generation Models
-LV Diffusion is a base text-to-video (T2V) generation model based on the latent video diffusion models ([LVDM](https://yingqinghe.github.io/LVDM/)). 
+### 1. Base T2V: Generic Text-to-video Generation
+We provide a base text-to-video (T2V) generation model based on the latent video diffusion models ([LVDM](https://yingqinghe.github.io/LVDM/)). 
 It can synthesize realistic videos based on the input text descriptions.
 
 <table class="center">
-  <td style="text-align:center;" width="170">xxx</td>
-  <td style="text-align:center;" width="170">xxx</td>
-  <td style="text-align:center;" width="170">xxx</td>
-  <td style="text-align:center;" width="170">xxx</td>
+  <td style="text-align:center;" width="170">"Campfire at night in a snowy forest with starry sky in the background."</td>
+  <td style="text-align:center;" width="170">"Cars running on the highway at night."</td>
+  <td style="text-align:center;" width="170">"close up of a clown fish swimming. 4K"</td>
+  <td style="text-align:center;" width="170">"astronaut riding a horse"</td>
   <tr>
   <td><img src=assets/summary/t2v/005.gif width="170"></td>
   <td><img src=assets/summary/t2v/006.gif width="170"></td>
@@ -27,7 +27,7 @@ It can synthesize realistic videos based on the input text descriptions.
 
 ### 2. VideoLoRA: Personalized Text-to-Video Generation with LoRA
 
-Based on the pretrained LV Diffusion, we can create our **own** video generation models by finetuning it on a set of video clips or images describing a certain concept.
+Based on the pretrained LVDM, we can create our **own** video generation models by finetuning it on a set of video clips or images describing a certain concept.
 
 We adopt [LoRA](https://arxiv.org/abs/2106.09685) to implement the finetuning as it is eary to train and require less computational resources.
 
@@ -53,8 +53,8 @@ The trigger word for each VideoLoRA is annotated below the generation result.
 
 <br>  
 
-### 3. VideoControl: Video Generation with More Conditions
-To enhance the controllable abilities of the T2V model, we developed conditional adapter that is inspired by [T2I-adapter](https://github.com/TencentARC/T2I-Adapter).
+### 3. VideoControl: Video Generation with More Condition Controls
+To enhance the controllable abilities of the T2V model, we developed conditional adapter inspired by [T2I-adapter](https://github.com/TencentARC/T2I-Adapter).
 By pluging a lightweight adapter module to the T2V model, we can obtained generation results with more detailed control signals such as depth.
 
 input text: `Ironman is fighting against the enemy, big fire in the background, photorealistic, 4k`
