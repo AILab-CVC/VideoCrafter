@@ -91,10 +91,10 @@ input text: `Ironman is fighting against the enemy, big fire in the background, 
 
 
 ---
-## ⚙️ Installation
+## ⚙️ Setup
 
 
-<details><summary>CLICK ME for installation via Anaconda </summary>
+<details><summary>CLICK ME for installing environment via Anaconda </summary>
 
 ```bash
 conda create -n lvdm python=3.8.5
@@ -103,18 +103,18 @@ pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 -f https://download.py
 pip install pytorch-lightning==1.8.3 omegaconf==2.1.1 einops==0.3.0 transformers==4.25.1
 pip install opencv-python==4.1.2.30 imageio==2.9.0 imageio-ffmpeg==0.4.2
 pip install av moviepy
-```  
+```
 
 </details>
+
 
 <br>  
 
 ## 💫 Inference 
 ### Text-to-Video
-run `bash sample_text2video.sh` in terminal OR
-<details><summary>CLICK ME For running commands </summary>
 
-
+1) Download pretrained T2V models via this [link](https://drive.google.com/file/d/13ZZTXyAKM3x0tObRQOQWdtnrI2ARWYf_/view?usp=share_link), and put the `model.ckpt` in `models/base_t2v/model.ckpt`.
+2) Directly run `bash sample_text2video.sh` in terminal OR input the following commands:
 ```bash
 python scripts/sample_text2video.py \
     --ckpt_path $BASE_PATH \
@@ -125,14 +125,16 @@ python scripts/sample_text2video.py \
     --batch_size 1 \
     --seed 1000
 ```
-</details>
+
 <br>
 
 
 ### VideoLoRA
-run `bash sample_videolora.sh` in terminal OR
-<details><summary>CLICK ME For running commands </summary>
+1) Download pretrained T2V models via this [link](https://drive.google.com/file/d/13ZZTXyAKM3x0tObRQOQWdtnrI2ARWYf_/view?usp=share_link), and put the `model.ckpt` in `models/base_t2v/model.ckpt`.
+   
+2) Download pretrained VideoLoRA models via this [link](https://drive.google.com/drive/folders/14tK8K_-3aLIrDIrr5CeUxzhGHn5gYBUZ?usp=share_link), and put them in `models/videolora/${model_name}.ckpt`.
 
+3) Directly run `bash sample_videolora.sh` in terminal OR input the following commands:
 
 ```bash
 python scripts/sample_text2video.py \
@@ -147,29 +149,32 @@ python scripts/sample_text2video.py \
     --lora_scale 1.0 \
     --lora_trigger_word $TAG
 ```
-</details>
 <br>
+4) If your find the lora effect is either too large or too small, you can adjust the `lora_scale` argument to control the strength.
+   <details><summary>CLICK ME for the visualization of different lora scales </summary>
+   
+  <!-- ### Difference LoRA scales -->
+  The effect of LoRA weights can be controlled by the `lora_scale`. `local_scale=0` indicates using the original base model, while `local_scale=1` indicates using the full lora weights. It can also be slightly larger than 1 to emphasize more effect from lora.
 
-### Difference LoRA scales
-The effect of LoRA weights can be controlled by the `lora_scale`. `local_scale=0` indicates using the original base model, while `local_scale=1` indicates using the full lora weights. It can also be slightly larger than 1 to emphasize more effect from lora.
+  <table class="center">
+    <td style="text-align:center;" width="170">scale=0.0</td>
+    <td style="text-align:center;" width="170">scale=0.25</td>
+    <td style="text-align:center;" width="170">scale=0.5</td>
+    <tr>
+    <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale0.gif width="170"></td>
+    <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale0.25.gif width="170"></td>
+    <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale0.5.gif width="170"></td>
+    </tr>
+    <td style="text-align:center;" width="170">scale=0.75</td>
+    <td style="text-align:center;" width="170">scale=1.0</td>
+    <td style="text-align:center;" width="170">scale=1.5</td>
+    <tr>
+    <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale0.75.gif width="170"></td>
+    <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale1.0.gif width="170"></td>
+    <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale1.5.gif width="170"></td>
+  </table >
+</details>
 
-<table class="center">
-  <td style="text-align:center;" width="170">scale=0.0</td>
-  <td style="text-align:center;" width="170">scale=0.25</td>
-  <td style="text-align:center;" width="170">scale=0.5</td>
-  <tr>
-  <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale0.gif width="170"></td>
-  <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale0.25.gif width="170"></td>
-  <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale0.5.gif width="170"></td>
-  </tr>
-  <td style="text-align:center;" width="170">scale=0.75</td>
-  <td style="text-align:center;" width="170">scale=1.0</td>
-  <td style="text-align:center;" width="170">scale=1.5</td>
-  <tr>
-  <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale0.75.gif width="170"></td>
-  <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale1.0.gif width="170"></td>
-  <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale1.5.gif width="170"></td>
-</table >
 
 ---
 ## 🥳 Gallery
