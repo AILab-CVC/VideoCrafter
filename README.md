@@ -61,7 +61,6 @@ input text: `Ironman is fighting against the enemy, big fire in the background, 
 <table class="center">
   <td><img src=assets/adapter/6_GIF/input_5_randk1.gif width="170"></td>
   <td><img src=assets/adapter/6_GIF/depth_5_randk1.gif width="170"></td>
-  <td><img src=assets/adapter/6_GIF/0000.gif width="170"></td>
   <td><img src=assets/adapter/6_GIF/0008.gif width="170"></td>
   <td><img src=assets/adapter/6_GIF/0006.gif width="170"></td>
   <td><img src=assets/adapter/6_GIF/0004.gif width="170"></td>
