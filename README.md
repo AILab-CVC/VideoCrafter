@@ -1,11 +1,12 @@
-# VideoCrafter
+
+# VideoCrafter：A Toolkit for Text-to-video Generation and Editing 
+
 
 ## 🔆 Introduction
 🤗🤗🤗 VideoCrafter is an open-source video generation and editing toolbox for crafting video content. 
-It currently includes text-to-video generation models and VideoLoRA models with different styles.
-We will keep updating this repo and add more features and models.
+It currently includes the following three types of models:
 
-### ☝️ Text-to-Video Base Model
+### 1. Base Model: Generic Text-to-video Generation
 
 <table class="center">
   <td style="text-align:center;" width="170">xxx</td>
@@ -20,14 +21,15 @@ We will keep updating this repo and add more features and models.
   </tr>
 </table >
 
-<br>  
+### 2. VideoLoRA: Personalized Video Generation with LoRA
 
-### ✌️ Customized VideoLoRA Models
-intro text here  
+
+<!-- ### ✌️ Customized VideoLoRA Models -->
+<!-- intro text here  
 intro text here  
 intro text here  
 
-input text `A monkey is playing a piano` to the four VideoLoRA models, xxx
+input text `A monkey is playing a piano` to the four VideoLoRA models, xxx -->
 
 <table class="center">
   <td><img src=assets/summary/1/001_loving_vincent.gif width="170"></td>
@@ -40,12 +42,17 @@ input text `A monkey is playing a piano` to the four VideoLoRA models, xxx
   <td style="text-align:center;" width="170">VideoLoRA<br>- Your Name -</td>
   <td style="text-align:center;" width="170">VideoLoRA<br>- CoCo -</td>
   <tr>
-  <!-- <td><img src=assets/summary/2/001_loving_vincent.gif width="170"></td>
-  <td><img src=assets/summary/2/002_frozen_3.gif width="170"></td>
-  <td><img src=assets/summary/2/003_your_name.gif width="170"></td>
-  <td><img src=assets/summary/2/004_coco.gif width="170"></td>
-  </tr> -->
 </table >
+
+
+### 3. VideoCond: Controllable Video Generation with Extra Condition
+TODO  
+
+We will keep updating this repo and add more features and models.
+
+<!-- ### ☝️ Text-to-Video Base Model -->
+
+<br>  
 
 <!-- ## Gallery
 ### ☝️ Text-to-Video Generation
