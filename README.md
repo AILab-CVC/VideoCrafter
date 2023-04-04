@@ -61,8 +61,8 @@ input text: `Ironman is fighting against the enemy, big fire in the background, 
 <table class="center">
   <td><img src=assets/adapter/6_GIF/input_5_randk1.gif width="170"></td>
   <td><img src=assets/adapter/6_GIF/depth_5_randk1.gif width="170"></td>
-  <td><img src=assets/adapter/6_GIF/0008.gif width="170"></td>
   <td><img src=assets/adapter/6_GIF/0006.gif width="170"></td>
+  <td><img src=assets/adapter/6_GIF/0008.gif width="170"></td>
   <td><img src=assets/adapter/6_GIF/0004.gif width="170"></td>
   </tr>
 </table >
@@ -70,20 +70,6 @@ input text: `Ironman is fighting against the enemy, big fire in the background, 
 
 🤗🤗🤗 We will keep updating this repo and add more features and models. Please stay tuned!
 
-
-<!-- ## Gallery
-### ☝️ Text-to-Video Generation
-<table class="center">
-  <td style="text-align:center;" width="170">Loving Vincent</td>
-  <td style="text-align:center;" width="170">Frozen</td>
-  <td style="text-align:center;" width="170">Your Name</td>
-  <td style="text-align:center;" width="170">CoCo</td>
-  <tr>
-  <td><img src=assets/001_loving_vincent.gif width="170"></td>
-  <td><img src=assets/002_frozen.gif width="170"></td>
-  <td><img src=assets/003_your_name.gif width="170"></td>
-  <td><img src=assets/004_coco.gif width="170"></td>
-</tr> -->
 </table >
 
 <br>  
@@ -91,7 +77,7 @@ input text: `Ironman is fighting against the enemy, big fire in the background, 
 ---
 
 ## 📝 Changelog
-- __[2023.04.04]__: release pretrained text-to-video models and inference code
+- __[2023.04.05]__: release pretrained Text-to-Video models, VideoLora models, and inference code.
 <br>
 
 <!--  -->
@@ -234,17 +220,16 @@ The effect of LoRA weights can be controlled by the `lora_scale`. `local_scale=0
 </table >
 
 #### CoCo
-TOBEDONE
 <table class="center">
-  <td style="text-align:center;" width="170">xxx</td>
-  <td style="text-align:center;" width="170">xxx</td>
-  <td style="text-align:center;" width="170">xxx</td>
-  <td style="text-align:center;" width="170">xxx</td>
+  <td style="text-align:center;" width="170">"Humans building a highway on mars, highly detailed"</td>
+  <td style="text-align:center;" width="170">"A blue unicorn flying over a mystical land"</td>
+  <td style="text-align:center;" width="170">"Robot dancing in times square"</td>
+  <td style="text-align:center;" width="170">"A 3D model of an elephant origami. Studio lighting."</td>
   <tr>
-  <td><img src=assets/lora/3_your_name/007.gif width="170"></td>
-  <td><img src=assets/lora/3_your_name/007.gif width="170"></td>
-  <td><img src=assets/lora/3_your_name/007.gif width="170"></td>
-  <td><img src=assets/lora/3_your_name/007.gif width="170"></td>
+  <td><img src=assets/lora/4_coco/008.gif width="170"></td>
+  <td><img src=assets/lora/4_coco/005.gif width="170"></td>
+  <td><img src=assets/lora/4_coco/009.gif width="170"></td>
+  <td><img src=assets/lora/4_coco/001.gif width="170"></td>
 </tr>
 </table >
 
@@ -302,3 +287,4 @@ If your have any comments or questions, feel free to contact [Yingqing He](yhebm
 
 ## 📢 Disclaimer
 We develop this repository for RESEARCH purposes, so it can only be used for personal/research/non-commercial purposes.
+****
