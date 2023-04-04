@@ -169,73 +169,53 @@ TOBEDONE
 <details><summary>CLICK ME For Mannual Installation </summary>
 
 ```bash
-git clone https://github.com/Winfredy/SadTalker.git
-
-cd SadTalker 
-
-conda create -n sadtalker python=3.8
-
-conda activate sadtalker
-
-pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113
-
-conda install ffmpeg
-
-pip install dlib-bin # [dlib-bin is much faster than dlib installation] conda install dlib 
-
-pip install -r requirements.txt
-
-### install gpfgan for enhancer
-pip install gfpgan ### or:  pip install git+https://github.com/TencentARC/GFPGAN.git
-
+conda create -n lvdm python=3.8.5
+conda activate lvdm
+pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 -f https://download.pytorch.org/whl/torch_stable.html
+pip install pytorch-lightning==1.8.3 omegaconf==2.1.1 einops==0.3.0
+pip install opencv-python==4.1.2.30 imageio==2.9.0 imageio-ffmpeg==0.4.2
+pip install transformers==4.25.1
 ```  
 
 </details>
 
 
 ## 🌟 Inference Text-to-Video
-`bash sample_text2video.sh` OR
+run `bash sample_text2video.sh` in terminal OR
 <details><summary>CLICK ME For running commands </summary>
 
 
 ```bash
-# TBDTBDTBDTBD
-python inference.py --driven_audio <audio.wav> \
-                    --source_image <video.mp4 or picture.png> \
-                    --batch_size <default equals 2, a larger run faster> \
-                    --expression_scale <default is 1.0, a larger value will make the motion stronger> \
-                    --result_dir <a file to store results> \
-                    --still <add this flag will show fewer head motion> \
-                    --preprocess <resize or crop the input image, default is crop> \
-                    --enhancer <default is None, you can choose gfpgan or RestoreFormer> \
-                    --full_img_enhancer <default is None, you can choose gfpgan or RestoreFormer> \
-                    --ref_eyeblink <default is None, ref_eyeblink is used to provide more natural eyebrow movement and eye blinking> \ 
-                    --ref_pose <default is None, ref_pose is used to provide head pose> 
-
+python scripts/sample_text2video.py \
+    --ckpt_path $BASE_PATH \
+    --config_path $CONFIG_PATH \
+    --prompt $PROMPT \
+    --save_dir $OUTDIR \
+    --n_samples 1 \
+    --batch_size 1 \
+    --seed 1000
 ```
 </details>
 <br>
 
 
 ## 🌟 Inference VideoLoRA
-`bash sample_videolora.sh` OR
+run `bash sample_videolora.sh` in terminal OR
 <details><summary>CLICK ME For running commands </summary>
 
 
 ```bash
-# TBDTBDTBDTBD
-python inference.py --driven_audio <audio.wav> \
-                    --source_image <video.mp4 or picture.png> \
-                    --batch_size <default equals 2, a larger run faster> \
-                    --expression_scale <default is 1.0, a larger value will make the motion stronger> \
-                    --result_dir <a file to store results> \
-                    --still <add this flag will show fewer head motion> \
-                    --preprocess <resize or crop the input image, default is crop> \
-                    --enhancer <default is None, you can choose gfpgan or RestoreFormer> \
-                    --full_img_enhancer <default is None, you can choose gfpgan or RestoreFormer> \
-                    --ref_eyeblink <default is None, ref_eyeblink is used to provide more natural eyebrow movement and eye blinking> \ 
-                    --ref_pose <default is None, ref_pose is used to provide head pose> 
-
+python scripts/sample_text2video.py \
+    --ckpt_path $BASE_PATH \
+    --config_path $CONFIG_PATH \
+    --prompt $PROMPT \
+    --save_dir $OUTDIR \
+    --n_samples 1 \
+    --batch_size 1 \
+    --seed 1000 \
+    --inject_lora \
+    --lora_scale 1.0 \
+    --lora_trigger_word $TAG
 ```
 </details>
 <br>
