@@ -94,8 +94,9 @@ input text: `Ironman is fighting against the enemy, big fire in the background, 
 ## ⚙️ Setup
 
 
-<details><summary>CLICK ME for installing environment via Anaconda </summary>
+<!-- <details><summary>CLICK ME for installing environment via Anaconda </summary> -->
 
+### Installing environment via Anaconda
 ```bash
 conda create -n lvdm python=3.8.5
 conda activate lvdm
