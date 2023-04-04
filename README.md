@@ -57,7 +57,7 @@ The trigger word for each VideoLoRA is annotated below the generation result.
 To enhance the controllable abilities of the T2V model, we developed T2V adapter that is inspired by [T2I-adapter](https://github.com/TencentARC/T2I-Adapter).
 By pluging a lightweight adapter module to the T2V model, we can obtained generation results with more detailed control signals such as depth.
 
-inpur text: `Ironman is fighting against the enemy, big fire in the background, photorealistic, 4k`
+input text: `Ironman is fighting against the enemy, big fire in the background, photorealistic, 4k`
 <table class="center">
   <td><img src=assets/adapter/6_GIF/input_5_randk1.gif width="170"></td>
   <td><img src=assets/adapter/6_GIF/depth_5_randk1.gif width="170"></td>
