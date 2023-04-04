@@ -143,7 +143,7 @@ pip install av moviepy
 </details>
 
 
-<br>
+<!-- <br> -->
 
 
 ### 2. VideoLoRA
@@ -177,7 +177,6 @@ pip install av moviepy
       --lora_trigger_word "$TAG" \
       --lora_scale 1.0
 ```
-<br>
 
 
 4) If your find the lora effect is either too large or too small, you can adjust the `lora_scale` argument to control the strength.
@@ -205,6 +204,7 @@ pip install av moviepy
 
 </details>
 
+<br>
 
 ---
 ## 🥳 Gallery
