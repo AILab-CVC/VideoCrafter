@@ -20,10 +20,9 @@ It can synthesize realistic videos based on the input text descriptions.
   <td><img src=assets/summary/t2v/006.gif width="170"></td>
   <td><img src=assets/summary/t2v/008.gif width="170"></td>
   <td><img src=assets/summary/t2v/004.gif width="170"></td>
-  </tr>
 </table >
 
-<br>  
+<!-- <br>   -->
 
 ### 2. VideoLoRA: Personalized Text-to-Video Generation with LoRA
 
@@ -49,7 +48,7 @@ Results of inputting `A monkey is playing a piano, ${trigger_word}` to the four 
   <td style="text-align:center;" width="170">"coco style"</td>
   <tr>
 </table >
-The trigger word for each VideoLoRA is annotated below the generation result.
+The trigger word for each VideoLoRA is annotated below the generation result.  
 
 <br>  
 
@@ -203,6 +202,9 @@ pip install av moviepy
     </table >
 
 </details>
+
+### 3. VideoControl
+⏳⏳⏳ Comming soon. Please stay tuned!
 
 <br>
 
