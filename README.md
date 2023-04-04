@@ -111,68 +111,97 @@ pip install av moviepy
 <br>  
 
 ## 💫 Inference 
-### Text-to-Video
+### 1. Text-to-Video
 
 1) Download pretrained T2V models via this [link](https://drive.google.com/file/d/13ZZTXyAKM3x0tObRQOQWdtnrI2ARWYf_/view?usp=share_link), and put the `model.ckpt` in `models/base_t2v/model.ckpt`.
-2) Directly run `bash sample_text2video.sh` in terminal OR input the following commands:
+2) Input the following commands in terminal, it will start running in the GPU 0.
 ```bash
-python scripts/sample_text2video.py \
-    --ckpt_path $BASE_PATH \
-    --config_path $CONFIG_PATH \
-    --prompt $PROMPT \
-    --save_dir $OUTDIR \
-    --n_samples 1 \
-    --batch_size 1 \
-    --seed 1000
+  PROMPT="astronaut riding a horse" 
+  OUTDIR="results/"
+
+  BASE_PATH="models/base_t2v/model.ckpt"
+  CONFIG_PATH="models/base_t2v/model_config.yaml"
+
+  python scripts/sample_text2video.py \
+      --ckpt_path $BASE_PATH \
+      --config_path $CONFIG_PATH \
+      --prompt "$PROMPT" \
+      --save_dir $OUTDIR \
+      --n_samples 1 \
+      --batch_size 1 \
+      --seed 1000 \
+      --show_denoising_progress
 ```
+
+
+<details><summary>CLICK ME for more options </summary>
+
+- `gpu_id`: specify the gpu index you want to use.  
+- `ddp`: better to enable it if you have multiple GPUs.
+
+</details>
+
 
 <br>
 
 
-### VideoLoRA
-1) Download pretrained T2V models via this [link](https://drive.google.com/file/d/13ZZTXyAKM3x0tObRQOQWdtnrI2ARWYf_/view?usp=share_link), and put the `model.ckpt` in `models/base_t2v/model.ckpt`.
+### 2. VideoLoRA
+1) Same with 1-1: Download pretrained T2V models via this [link](https://drive.google.com/file/d/13ZZTXyAKM3x0tObRQOQWdtnrI2ARWYf_/view?usp=share_link), and put the `model.ckpt` in `models/base_t2v/model.ckpt`.
    
 2) Download pretrained VideoLoRA models via this [link](https://drive.google.com/drive/folders/14tK8K_-3aLIrDIrr5CeUxzhGHn5gYBUZ?usp=share_link), and put them in `models/videolora/${model_name}.ckpt`.
 
-3) Directly run `bash sample_videolora.sh` in terminal OR input the following commands:
+3) Input the following commands in terminal, it will start running in the GPU 0.
 
 ```bash
-python scripts/sample_text2video.py \
-    --ckpt_path $BASE_PATH \
-    --config_path $CONFIG_PATH \
-    --prompt $PROMPT \
-    --save_dir $OUTDIR \
-    --n_samples 1 \
-    --batch_size 1 \
-    --seed 1000 \
-    --inject_lora \
-    --lora_scale 1.0 \
-    --lora_trigger_word $TAG
+  PROMPT="astronaut riding a horse"
+  OUTDIR="results/videolora"
+
+  BASE_PATH="models/base_t2v/model.ckpt"
+  CONFIG_PATH="models/base_t2v/model_config.ckpt"
+
+  LORA_PATH="models/videolora/lora_001_Loving_Vincent_style.ckpt"
+  TAG=", Loving Vincent style"
+
+  python scripts/sample_text2video.py \
+      --ckpt_path $BASE_PATH \
+      --config_path $CONFIG_PATH \
+      --prompt "$PROMPT" \
+      --save_dir $OUTDIR \
+      --n_samples 1 \
+      --batch_size 1 \
+      --seed 1000 \
+      --show_denoising_progress \
+      --inject_lora \
+      --lora_path $LORA_PATH \
+      --lora_trigger_word "$TAG" \
+      --lora_scale 1.0
 ```
 <br>
+
+
 4) If your find the lora effect is either too large or too small, you can adjust the `lora_scale` argument to control the strength.
    <details><summary>CLICK ME for the visualization of different lora scales </summary>
    
-  <!-- ### Difference LoRA scales -->
-  The effect of LoRA weights can be controlled by the `lora_scale`. `local_scale=0` indicates using the original base model, while `local_scale=1` indicates using the full lora weights. It can also be slightly larger than 1 to emphasize more effect from lora.
+    The effect of LoRA weights can be controlled by the `lora_scale`. `local_scale=0` indicates using the original base model, while `local_scale=1` indicates using the full lora weights. It can also be slightly larger than 1 to emphasize more effect from lora.
 
-  <table class="center">
-    <td style="text-align:center;" width="170">scale=0.0</td>
-    <td style="text-align:center;" width="170">scale=0.25</td>
-    <td style="text-align:center;" width="170">scale=0.5</td>
-    <tr>
-    <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale0.gif width="170"></td>
-    <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale0.25.gif width="170"></td>
-    <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale0.5.gif width="170"></td>
-    </tr>
-    <td style="text-align:center;" width="170">scale=0.75</td>
-    <td style="text-align:center;" width="170">scale=1.0</td>
-    <td style="text-align:center;" width="170">scale=1.5</td>
-    <tr>
-    <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale0.75.gif width="170"></td>
-    <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale1.0.gif width="170"></td>
-    <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale1.5.gif width="170"></td>
-  </table >
+    <table class="center">
+      <td style="text-align:center;" width="170">scale=0.0</td>
+      <td style="text-align:center;" width="170">scale=0.25</td>
+      <td style="text-align:center;" width="170">scale=0.5</td>
+      <tr>
+      <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale0.gif width="170"></td>
+      <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale0.25.gif width="170"></td>
+      <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale0.5.gif width="170"></td>
+      </tr>
+      <td style="text-align:center;" width="170">scale=0.75</td>
+      <td style="text-align:center;" width="170">scale=1.0</td>
+      <td style="text-align:center;" width="170">scale=1.5</td>
+      <tr>
+      <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale0.75.gif width="170"></td>
+      <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale1.0.gif width="170"></td>
+      <td><img src=assets/diffscale/astronaut_riding_a_horse,_Loving_Vincent_style_000_scale1.5.gif width="170"></td>
+    </table >
+
 </details>
 
 
