@@ -3,6 +3,8 @@
 
 
 ## 🔆 Introduction
+<img src=assets/intro.gif>  
+
 🤗🤗🤗 VideoCrafter is an open-source video generation and editing toolbox for crafting video content.   
 It currently includes the following THREE types of models:
 
