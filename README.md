@@ -7,7 +7,7 @@
 🤗🤗🤗 VideoCrafter is an open-source video generation and editing toolbox for crafting video content.   
 It currently includes the following THREE types of models:
 
-<img src=assets/intro.gif>  
+<a href='https://www.youtube.com/watch?v=SJ_TOVjn5zs'> <img src=assets/intro.gif> </a>
 
 
 ### 1. Base T2V: Generic Text-to-video Generation
