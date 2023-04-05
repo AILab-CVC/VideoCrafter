@@ -3,7 +3,7 @@ PROMPT="astronaut riding a horse" # OR: PROMPT="input/prompts.txt" for sampling 
 OUTDIR="results/videolora"
 
 BASE_PATH="models/base_t2v/model.ckpt"
-CONFIG_PATH="models/base_t2v/model_config.ckpt"
+CONFIG_PATH="models/base_t2v/model_config.yaml"
 
 # lora args
 LORA_PATH="models/videolora/lora_001_Loving_Vincent_style.ckpt"
