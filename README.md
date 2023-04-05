@@ -1,12 +1,14 @@
 
-# VideoCrafter：A Toolkit for Text-to-Video Generation and Editing 
+## ___***VideoCrafter：A Toolkit for Text-to-Video Generation and Editing***___
 
 
 ## 🔆 Introduction
-<img src=assets/intro.gif>  
 
 🤗🤗🤗 VideoCrafter is an open-source video generation and editing toolbox for crafting video content.   
 It currently includes the following THREE types of models:
+
+<img src=assets/intro.gif>  
+
 
 ### 1. Base T2V: Generic Text-to-video Generation
 We provide a base text-to-video (T2V) generation model based on the latent video diffusion models ([LVDM](https://yingqinghe.github.io/LVDM/)). 
