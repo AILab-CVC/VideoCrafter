@@ -1,10 +1,14 @@
 
-# VideoCrafter：A Toolkit for Text-to-Video Generation and Editing 
+## ___***VideoCrafter：A Toolkit for Text-to-Video Generation and Editing***___
 
 
 ## 🔆 Introduction
+
 🤗🤗🤗 VideoCrafter is an open-source video generation and editing toolbox for crafting video content.   
 It currently includes the following THREE types of models:
+
+<a href='https://www.youtube.com/watch?v=SJ_TOVjn5zs'> <img src=assets/intro.gif> </a>
+
 
 ### 1. Base T2V: Generic Text-to-video Generation
 We provide a base text-to-video (T2V) generation model based on the latent video diffusion models ([LVDM](https://yingqinghe.github.io/LVDM/)). 
@@ -28,7 +32,7 @@ It can synthesize realistic videos based on the input text descriptions.
 
 Based on the pretrained LVDM, we can create our **own** video generation models by finetuning it on a set of video clips or images describing a certain concept.
 
-We adopt [LoRA](https://arxiv.org/abs/2106.09685) to implement the finetuning as it is eary to train and require less computational resources.
+We adopt [LoRA](https://arxiv.org/abs/2106.09685) to implement the finetuning as it is easy to train and requires fewer computational resources.
 
 Below are generation results from our **four VideoLoRA models** that are trained on four different styles of video clips.
 
@@ -103,6 +107,7 @@ pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 -f https://download.py
 pip install pytorch-lightning==1.8.3 omegaconf==2.1.1 einops==0.3.0 transformers==4.25.1
 pip install opencv-python==4.1.2.30 imageio==2.9.0 imageio-ffmpeg==0.4.2
 pip install av moviepy
+pip install -e .
 ```
 
 </details>
@@ -148,7 +153,7 @@ pip install av moviepy
 ### 2. VideoLoRA
 1) Same with 1-1: Download pretrained T2V models via this [link](https://drive.google.com/file/d/13ZZTXyAKM3x0tObRQOQWdtnrI2ARWYf_/view?usp=share_link), and put the `model.ckpt` in `models/base_t2v/model.ckpt`.
    
-2) Download pretrained VideoLoRA models via this [link](https://drive.google.com/drive/folders/14tK8K_-3aLIrDIrr5CeUxzhGHn5gYBUZ?usp=share_link), and put them in `models/videolora/${model_name}.ckpt`.
+2) Download pretrained VideoLoRA models via this [link](https://drive.google.com/drive/folders/14tK8K_-3aLIrDIrr5CeUxzhGHn5gYBUZ?usp=share_link) (can select one model), and put it in `models/videolora/${model_name}.ckpt`.
 
 3) Input the following commands in terminal, it will start running in the GPU 0.
 
@@ -157,7 +162,7 @@ pip install av moviepy
   OUTDIR="results/videolora"
 
   BASE_PATH="models/base_t2v/model.ckpt"
-  CONFIG_PATH="models/base_t2v/model_config.ckpt"
+  CONFIG_PATH="models/base_t2v/model_config.yaml"
 
   LORA_PATH="models/videolora/lora_001_Loving_Vincent_style.ckpt"
   TAG=", Loving Vincent style"
@@ -176,7 +181,27 @@ pip install av moviepy
       --lora_trigger_word "$TAG" \
       --lora_scale 1.0
 ```
+<div style="text-indent:40px">
+<details>
+  <summary>CLICK ME for the TAG of all lora models </summary>
 
+  ```bash   
+
+  LORA_PATH="models/videolora/lora_001_Loving_Vincent_style.ckpt"  
+  TAG=", Loving Vincent style"  
+
+  LORA_PATH="models/videolora/lora_002_frozenmovie_style.ckpt"  
+  TAG=", frozenmovie style"  
+
+  LORA_PATH="models/videolora/lora_003_MakotoShinkaiYourName_style.ckpt"  
+  TAG=", MakotoShinkaiYourName style"  
+
+  LORA_PATH="models/videolora/lora_004_coco_style.ckpt"   
+  TAG=", coco style"
+  ```
+
+</details>
+</div>
 
 4) If your find the lora effect is either too large or too small, you can adjust the `lora_scale` argument to control the strength.
    <details><summary>CLICK ME for the visualization of different lora scales </summary>
