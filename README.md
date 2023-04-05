@@ -149,7 +149,7 @@ pip install -e .
 ### 2. VideoLoRA
 1) Same with 1-1: Download pretrained T2V models via this [link](https://drive.google.com/file/d/13ZZTXyAKM3x0tObRQOQWdtnrI2ARWYf_/view?usp=share_link), and put the `model.ckpt` in `models/base_t2v/model.ckpt`.
    
-2) Download pretrained VideoLoRA models via this [link](https://drive.google.com/drive/folders/14tK8K_-3aLIrDIrr5CeUxzhGHn5gYBUZ?usp=share_link), and put them in `models/videolora/${model_name}.ckpt`.
+2) Download pretrained VideoLoRA models via this [link](https://drive.google.com/drive/folders/14tK8K_-3aLIrDIrr5CeUxzhGHn5gYBUZ?usp=share_link) (can select one model), and put it in `models/videolora/${model_name}.ckpt`.
 
 3) Input the following commands in terminal, it will start running in the GPU 0.
 
@@ -158,7 +158,7 @@ pip install -e .
   OUTDIR="results/videolora"
 
   BASE_PATH="models/base_t2v/model.ckpt"
-  CONFIG_PATH="models/base_t2v/model_config.ckpt"
+  CONFIG_PATH="models/base_t2v/model_config.yaml"
 
   LORA_PATH="models/videolora/lora_001_Loving_Vincent_style.ckpt"
   TAG=", Loving Vincent style"
