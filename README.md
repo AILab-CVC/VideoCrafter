@@ -103,6 +103,7 @@ pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 -f https://download.py
 pip install pytorch-lightning==1.8.3 omegaconf==2.1.1 einops==0.3.0 transformers==4.25.1
 pip install opencv-python==4.1.2.30 imageio==2.9.0 imageio-ffmpeg==0.4.2
 pip install av moviepy
+pip install -e .
 ```
 
 </details>
