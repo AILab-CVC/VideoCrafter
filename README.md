@@ -32,7 +32,7 @@ It can synthesize realistic videos based on the input text descriptions.
 
 Based on the pretrained LVDM, we can create our **own** video generation models by finetuning it on a set of video clips or images describing a certain concept.
 
-We adopt [LoRA](https://arxiv.org/abs/2106.09685) to implement the finetuning as it is eary to train and require less computational resources.
+We adopt [LoRA](https://arxiv.org/abs/2106.09685) to implement the finetuning as it is easy to train and requires fewer computational resources.
 
 Below are generation results from our **four VideoLoRA models** that are trained on four different styles of video clips.
 
