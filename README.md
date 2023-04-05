@@ -181,7 +181,27 @@ pip install -e .
       --lora_trigger_word "$TAG" \
       --lora_scale 1.0
 ```
+<div style="text-indent:40px">
+<details>
+  <summary>CLICK ME for the TAG of all lora models </summary>
 
+  ```bash   
+
+  LORA_PATH="models/videolora/lora_001_Loving_Vincent_style.ckpt"  
+  TAG=", Loving Vincent style"  
+
+  LORA_PATH="models/videolora/lora_002_frozenmovie_style.ckpt"  
+  TAG=", frozenmovie style"  
+
+  LORA_PATH="models/videolora/lora_003_MakotoShinkaiYourName_style.ckpt"  
+  TAG=", MakotoShinkaiYourName style"  
+
+  LORA_PATH="models/videolora/lora_004_coco_style.ckpt"   
+  TAG=", coco style"
+  ```
+
+</details>
+</div>
 
 4) If your find the lora effect is either too large or too small, you can adjust the `lora_scale` argument to control the strength.
    <details><summary>CLICK ME for the visualization of different lora scales </summary>
