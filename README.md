@@ -20,10 +20,10 @@ It can synthesize realistic videos based on the input text descriptions.
   <td style="text-align:center;" width="170">"close up of a clown fish swimming. 4K"</td>
   <td style="text-align:center;" width="170">"astronaut riding a horse"</td>
   <tr>
-  <td><img src=assets/summary/t2v/005.gif width="170"></td>
-  <td><img src=assets/summary/t2v/006.gif width="170"></td>
-  <td><img src=assets/summary/t2v/008.gif width="170"></td>
-  <td><img src=assets/summary/t2v/004.gif width="170"></td>
+  <td><img src=assets/summary/1_t2v/001.gif width="170"></td>
+  <td><img src=assets/summary/1_t2v/002.gif width="170"></td>
+  <td><img src=assets/summary/1_t2v/003.gif width="170"></td>
+  <td><img src=assets/summary/1_t2v/004.gif width="170"></td>
 </table >
 
 <!-- <br>   -->
@@ -41,10 +41,10 @@ By providing a sentence describing the video content along with a LoRA trigger w
 
 Results of inputting `A monkey is playing a piano, ${trigger_word}` to the four VideoLoRA models:   
 <table class="center">
-  <td><img src=assets/summary/1/001_loving_vincent.gif width="170"></td>
-  <td><img src=assets/summary/1/002_frozen.gif width="170"></td>
-  <td><img src=assets/summary/1/003_your_name.gif width="170"></td>
-  <td><img src=assets/summary/1/004_coco.gif width="170"></td>
+  <td><img src=assets/summary/2_videolora/001_loving_vincent.gif width="170"></td>
+  <td><img src=assets/summary/2_videolora/002_frozen.gif width="170"></td>
+  <td><img src=assets/summary/2_videolora/003_your_name.gif width="170"></td>
+  <td><img src=assets/summary/2_videolora/004_coco.gif width="170"></td>
   </tr>
   <td style="text-align:center;" width="170">"Loving Vincent style"</td>
   <td style="text-align:center;" width="170">"frozenmovie style"</td>
@@ -62,11 +62,11 @@ By pluging a lightweight adapter module to the T2V model, we can obtained genera
 
 input text: `Ironman is fighting against the enemy, big fire in the background, photorealistic, 4k`
 <table class="center">
-  <td><img src=assets/adapter/6_GIF/input_5_randk1.gif width="170"></td>
-  <td><img src=assets/adapter/6_GIF/depth_5_randk1.gif width="170"></td>
-  <td><img src=assets/adapter/6_GIF/0006.gif width="170"></td>
-  <td><img src=assets/adapter/6_GIF/0008.gif width="170"></td>
-  <td><img src=assets/adapter/6_GIF/0004.gif width="170"></td>
+  <td><img src=assets/summary/3_videocontrol/input_5_randk1.gif width="170"></td>
+  <td><img src=assets/summary/3_videocontrol/depth_5_randk1.gif width="170"></td>
+  <td><img src=assets/summary/3_videocontrol/0001.gif width="170"></td>
+  <td><img src=assets/summary/3_videocontrol/0002.gif width="170"></td>
+  <td><img src=assets/summary/3_videocontrol/0003.gif width="170"></td>
   </tr>
 </table >
 
