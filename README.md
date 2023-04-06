@@ -85,9 +85,10 @@ input text: `Ironman is fighting against the enemy, big fire in the background, 
 
 <!--  -->
 ## ⏳ TODO
-- [ ] Huggingface demo
-- [ ] Release training code for VideoLoRA
+- [ ] Huggingface Gradio demo & Colab 
 - [ ] Technical report
+- [ ] Release new base model with NO WATERMARK
+- [ ] Release training code for VideoLoRA
 - [ ] More customized models
 
 <br>  
@@ -118,7 +119,7 @@ pip install -e .
 ## 💫 Inference 
 ### 1. Text-to-Video
 
-1) Download pretrained T2V models via this [link](https://drive.google.com/file/d/13ZZTXyAKM3x0tObRQOQWdtnrI2ARWYf_/view?usp=share_link), and put the `model.ckpt` in `models/base_t2v/model.ckpt`.
+1) Download pretrained T2V models via [Google Drive](https://drive.google.com/file/d/13ZZTXyAKM3x0tObRQOQWdtnrI2ARWYf_/view?usp=share_link) / [Huggingface](https://huggingface.co/VideoCrafter/t2v-version-1-1/tree/main/models), and put the `model.ckpt` in `models/base_t2v/model.ckpt`.
 2) Input the following commands in terminal, it will start running in the GPU 0.
 ```bash
   PROMPT="astronaut riding a horse" 
@@ -141,8 +142,9 @@ pip install -e .
 
 <details><summary>CLICK ME for more options </summary>
 
-- `gpu_id`: specify the gpu index you want to use.  
-- `ddp`: better to enable it if you have multiple GPUs.
+- `gpu_id`: specify the gpu index you want to use
+- `ddp`: better to enable it if you have multiple GPUs 
+- We also provide a reference shell script for using multiple GPUs via PyTorch DDP in `sample_text2video_multiGPU.sh`
 
 </details>
 
@@ -151,9 +153,9 @@ pip install -e .
 
 
 ### 2. VideoLoRA
-1) Same with 1-1: Download pretrained T2V models via this [link](https://drive.google.com/file/d/13ZZTXyAKM3x0tObRQOQWdtnrI2ARWYf_/view?usp=share_link), and put the `model.ckpt` in `models/base_t2v/model.ckpt`.
+1) Same with 1-1: Download pretrained T2V models via [Google Drive](https://drive.google.com/file/d/13ZZTXyAKM3x0tObRQOQWdtnrI2ARWYf_/view?usp=share_link) / [Huggingface](https://huggingface.co/VideoCrafter/t2v-version-1-1/tree/main/models), and put the `model.ckpt` in `models/base_t2v/model.ckpt`.
    
-2) Download pretrained VideoLoRA models via this [link](https://drive.google.com/drive/folders/14tK8K_-3aLIrDIrr5CeUxzhGHn5gYBUZ?usp=share_link) (can select one model), and put it in `models/videolora/${model_name}.ckpt`.
+2) Download pretrained VideoLoRA models via this [Google Drive](https://drive.google.com/drive/folders/14tK8K_-3aLIrDIrr5CeUxzhGHn5gYBUZ?usp=share_link) / [Huggingface](https://huggingface.co/VideoCrafter/t2v-version-1-1/tree/main/models) (can select one videolora model), and put it in `models/videolora/${model_name}.ckpt`.
 
 3) Input the following commands in terminal, it will start running in the GPU 0.
 
