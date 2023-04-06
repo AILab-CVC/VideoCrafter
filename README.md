@@ -113,6 +113,12 @@ pip install -e .
 
 </details>
 
+### Installing environment which supports xformer
+```bash
+conda create -n lvdm python=3.8.5
+conda activate lvdm
+pip install -r requirements_xformer.txt
+```
 
 <br>  
 
