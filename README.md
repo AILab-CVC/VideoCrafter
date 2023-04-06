@@ -2,6 +2,12 @@
 ## ___***VideoCrafter：A Toolkit for Text-to-Video Generation and Editing***___
 
 
+<a href='https://arxiv.org/abs/TODO'><img src='https://img.shields.io/badge/Technique Report-TODO-red'></a> 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/VideoCrafter/VideoCrafter/blob/main/quick_demo.ipynb)
+[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/VideoCrafter/VideoCrafter)
+[![GitHub](https://img.shields.io/github/stars/VideoCrafter/VideoCrafter?style=social)](https://github.com/VideoCrafter/VideoCrafter)
+
+
 ## 🔆 Introduction
 
 🤗🤗🤗 VideoCrafter is an open-source video generation and editing toolbox for crafting video content.   
@@ -85,7 +91,7 @@ input text: `Ironman is fighting against the enemy, big fire in the background, 
 
 <!--  -->
 ## ⏳ TODO
-- [ ] Huggingface Gradio demo & Colab 
+- [x] Huggingface Gradio demo & Colab 
 - [ ] Technical report
 - [ ] Release new base model with NO WATERMARK
 - [ ] Release training code for VideoLoRA
