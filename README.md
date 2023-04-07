@@ -86,7 +86,9 @@ input text: `Ironman is fighting against the enemy, big fire in the background, 
 ---
 
 ## 📝 Changelog
-- __[2023.04.05]__: release pretrained Text-to-Video models, VideoLora models, and inference code.
+- __[2023.04.05]__: Release pretrained Text-to-Video models, VideoLora models, and inference code.
+- __[2023.04.07]__: Huggingface Gradio demo and Colab demo released.
+
 <br>
 
 <!--  -->
