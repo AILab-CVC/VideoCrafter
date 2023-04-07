@@ -622,7 +622,7 @@ def net_load_lora(net, checkpoint_path, alpha=1.0, remove=False):
     state_dict = torch.load(checkpoint_path)
     for k, v in state_dict.items():
         state_dict[k] = v.to(net.device)
-    # import pdb;pdb.set_trace()
+
     for key in state_dict:
         if ".alpha" in key or key in visited:
             continue
@@ -678,6 +678,83 @@ def change_lora(model, inject_lora=False, lora_scale=1.0, lora_path='', last_tim
     # add new lora
     if inject_lora:
         net_load_lora(model, lora_path, alpha=lora_scale)
+
+
+def net_load_lora_v2(net, checkpoint_path, alpha=1.0, remove=False, origin_weight=None):
+    visited=[]
+    state_dict = torch.load(checkpoint_path)
+    for k, v in state_dict.items():
+        state_dict[k] = v.to(net.device)
+
+    for key in state_dict:
+        if ".alpha" in key or key in visited:
+            continue
+        layer_infos = key.split(".")[:-2] # remove lora_up and down weight
+        curr_layer = net
+        # find the target layer
+        temp_name = layer_infos.pop(0)
+        while len(layer_infos) > -1:
+            curr_layer = curr_layer.__getattr__(temp_name)
+            if len(layer_infos) > 0:
+                temp_name = layer_infos.pop(0)
+            elif len(layer_infos) == 0:
+                break
+        if curr_layer.__class__ not in [nn.Linear, nn.Conv2d]:
+            print('missing param at:', key)
+            continue
+        pair_keys = []
+        if "lora_down" in key:
+            pair_keys.append(key.replace("lora_down", "lora_up"))
+            pair_keys.append(key)
+        else:
+            pair_keys.append(key)
+            pair_keys.append(key.replace("lora_up", "lora_down"))
+
+        # storage weight
+        if origin_weight is None:
+            origin_weight = dict()
+            storage_key = key.replace("lora_down", "lora").replace("lora_up", "lora")
+            origin_weight[storage_key] = curr_layer.weight.data.clone()
+        else:
+            storage_key = key.replace("lora_down", "lora").replace("lora_up", "lora")
+            if storage_key not in origin_weight.keys():
+                origin_weight[storage_key] = curr_layer.weight.data.clone()
+
+
+        # update 
+        if len(state_dict[pair_keys[0]].shape) == 4:
+            # for conv
+            if remove:
+                curr_layer.weight.data = origin_weight[storage_key].clone()
+            else:
+                weight_up = state_dict[pair_keys[0]].squeeze(3).squeeze(2).to(torch.float32)
+                weight_down = state_dict[pair_keys[1]].squeeze(3).squeeze(2).to(torch.float32)
+                curr_layer.weight.data += alpha * torch.mm(weight_up, weight_down).unsqueeze(2).unsqueeze(3)
+        else:
+            # for linear
+            if remove:
+                curr_layer.weight.data = origin_weight[storage_key].clone()
+            else:
+                weight_up = state_dict[pair_keys[0]].to(torch.float32)
+                weight_down = state_dict[pair_keys[1]].to(torch.float32)
+                curr_layer.weight.data += alpha * torch.mm(weight_up, weight_down)
+
+        # update visited list
+        for item in pair_keys:
+            visited.append(item)
+    print('load_weight_num:',len(visited))
+    return origin_weight
+
+def change_lora_v2(model, inject_lora=False, lora_scale=1.0, lora_path='', last_time_lora='', last_time_lora_scale=1.0, origin_weight=None):
+    # remove lora
+    if last_time_lora != '':
+        origin_weight = net_load_lora_v2(model, last_time_lora, alpha=last_time_lora_scale, remove=True, origin_weight=origin_weight)
+    # add new lora
+    if inject_lora:
+        origin_weight = net_load_lora_v2(model, lora_path, alpha=lora_scale, origin_weight=origin_weight)
+    return origin_weight
+
+
 
 
 
