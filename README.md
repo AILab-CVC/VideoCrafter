@@ -8,7 +8,7 @@
 [![GitHub](https://img.shields.io/github/stars/VideoCrafter/VideoCrafter?style=social)](https://github.com/VideoCrafter/VideoCrafter)
 
 
-## 🔆 Introduction
+## 🔆 Introduction   ([Showcases](https://github.com/VideoCrafter/VideoCrafter-gallery-showcase))
 
 🤗🤗🤗 VideoCrafter is an open-source video generation and editing toolbox for crafting video content.   
 It currently includes the following THREE types of models:
@@ -259,7 +259,7 @@ pip install -r requirements_xformer.txt
 <br>
 
 ---
-## 🥳 Gallery ([more results](https://github.com/VideoCrafter/VideoCrafter-gallery-showcase))
+## 🥳 Gallery 
 ### VideoLoRA Models
 #### Loving Vincent Style
 <table class="center">
