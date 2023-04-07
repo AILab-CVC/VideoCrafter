@@ -248,6 +248,14 @@ pip install -r requirements_xformer.txt
 ### 3. VideoControl
 ⏳⏳⏳ Comming soon. Please stay tuned!🤗
 
+### 4. Gradio demo
+1. We provide a gradio-based web interface for convenient inference, which currently supports the pretrained T2V model and several VideoLoRA models. After installing the environment and downloading the model to the appropriate location, you can launch the local web service with the following script.
+    ```
+    python gradio_app.py
+    ```
+2. The online version is available on [huggingface](https://huggingface.co/spaces/VideoCrafter/VideoCrafter).
+
+
 <br>
 
 ---
