@@ -259,7 +259,7 @@ pip install -r requirements_xformer.txt
 <br>
 
 ---
-## 🥳 Gallery
+## 🥳 Gallery ([more results](https://github.com/VideoCrafter/VideoCrafter-gallery-showcase))
 ### VideoLoRA Models
 #### Loving Vincent Style
 <table class="center">
