@@ -168,9 +168,9 @@ pip install -r requirements_xformer.txt
 
 
 ### 2. VideoLoRA
-1) Same with 1-1: Download pretrained T2V models via [Google Drive](https://drive.google.com/file/d/13ZZTXyAKM3x0tObRQOQWdtnrI2ARWYf_/view?usp=share_link) / [Huggingface](https://huggingface.co/VideoCrafter/t2v-version-1-1/tree/main/models), and put the `model.ckpt` in `models/base_t2v/model.ckpt`.
+1) Same with 1-1: Download pretrained T2V models via [Google Drive](https://drive.google.com/file/d/13ZZTXyAKM3x0tObRQOQWdtnrI2ARWYf_/view?usp=share_link) / [Hugging Face](https://huggingface.co/VideoCrafter/t2v-version-1-1/tree/main/models), and put the `model.ckpt` in `models/base_t2v/model.ckpt`.
    
-2) Download pretrained VideoLoRA models via this [Google Drive](https://drive.google.com/drive/folders/14tK8K_-3aLIrDIrr5CeUxzhGHn5gYBUZ?usp=share_link) / [Huggingface](https://huggingface.co/VideoCrafter/t2v-version-1-1/tree/main/models) (can select one videolora model), and put it in `models/videolora/${model_name}.ckpt`.
+2) Download pretrained VideoLoRA models via this [Google Drive](https://drive.google.com/drive/folders/14tK8K_-3aLIrDIrr5CeUxzhGHn5gYBUZ?usp=share_link) / [Hugging Face](https://huggingface.co/VideoCrafter/t2v-version-1-1/tree/main/models) (can select one videolora model), and put it in `models/videolora/${model_name}.ckpt`.
 
 3) Input the following commands in terminal, it will start running in the GPU 0.
 
@@ -253,7 +253,7 @@ pip install -r requirements_xformer.txt
     ```
     python gradio_app.py
     ```
-2. The online version is available on [huggingface](https://huggingface.co/spaces/VideoCrafter/VideoCrafter).
+2. The online version is available on [Hugging Face](https://huggingface.co/spaces/VideoCrafter/VideoCrafter).
 
 
 <br>
