@@ -87,13 +87,13 @@ input text: `Ironman is fighting against the enemy, big fire in the background, 
 
 ## 📝 Changelog
 - __[2023.04.05]__: Release pretrained Text-to-Video models, VideoLora models, and inference code.
-- __[2023.04.07]__: Huggingface Gradio demo and Colab demo released.
+- __[2023.04.07]__: Hugging Face Gradio demo and Colab demo released.
 
 <br>
 
 <!--  -->
 ## ⏳ TODO
-- [x] Huggingface Gradio demo & Colab 
+- [x] Hugging Face Gradio demo & Colab 
 - [ ] Release VideoControl models for different input types, such as depth, canny, pose
 - [ ] Technical report
 - [ ] Release new base model with NO WATERMARK
@@ -134,7 +134,7 @@ pip install -r requirements_xformer.txt
 ## 💫 Inference 
 ### 1. Text-to-Video
 
-1) Download pretrained T2V models via [Google Drive](https://drive.google.com/file/d/13ZZTXyAKM3x0tObRQOQWdtnrI2ARWYf_/view?usp=share_link) / [Huggingface](https://huggingface.co/VideoCrafter/t2v-version-1-1/tree/main/models), and put the `model.ckpt` in `models/base_t2v/model.ckpt`.
+1) Download pretrained T2V models via [Google Drive](https://drive.google.com/file/d/13ZZTXyAKM3x0tObRQOQWdtnrI2ARWYf_/view?usp=share_link) / [Hugging Face](https://huggingface.co/VideoCrafter/t2v-version-1-1/tree/main/models), and put the `model.ckpt` in `models/base_t2v/model.ckpt`.
 2) Input the following commands in terminal, it will start running in the GPU 0.
 ```bash
   PROMPT="astronaut riding a horse" 
