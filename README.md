@@ -94,6 +94,7 @@ input text: `Ironman is fighting against the enemy, big fire in the background, 
 <!--  -->
 ## ⏳ TODO
 - [x] Huggingface Gradio demo & Colab 
+- [ ] Release VideoControl models for different input types, such as depth, canny, pose
 - [ ] Technical report
 - [ ] Release new base model with NO WATERMARK
 - [ ] Release training code for VideoLoRA
