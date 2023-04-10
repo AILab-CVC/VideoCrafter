@@ -106,10 +106,18 @@ input text: `Ironman is fighting against the enemy, big fire in the background, 
 ---
 ## ⚙️ Setup
 
-
+Choose one of the following three approaches.
 <!-- <details><summary>CLICK ME for installing environment via Anaconda </summary> -->
+### 1. Install Environment via Anaconda (Recommended)
+```bash
+conda create -n lvdm python=3.8.5
+conda activate lvdm
+pip install -r requirements.txt
+```
 
-### Installing environment via Anaconda
+### 2. Install Environment Manually
+<details><summary>CLICK ME to show details</summary>
+
 ```bash
 conda create -n lvdm python=3.8.5
 conda activate lvdm
@@ -119,10 +127,10 @@ pip install opencv-python==4.1.2.30 imageio==2.9.0 imageio-ffmpeg==0.4.2
 pip install av moviepy
 pip install -e .
 ```
-
 </details>
 
-### Installing environment which supports xformer
+### 3. Install Environment with xFormers
+Useful for saving GPU memory
 ```bash
 conda create -n lvdm python=3.8.5
 conda activate lvdm
