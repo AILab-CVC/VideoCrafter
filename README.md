@@ -380,6 +380,11 @@ pip install -r requirements_xformer.txt
 ## 📭 Contact
 If your have any comments or questions, feel free to contact [Yingqing He](yhebm@connect.ust.hk), [Haoxin Chen](jszxchx@126.com) or [Menghan Xia](menghanxyz@gmail.com).
 
+## 🤗 Acknowledgements
+Our codebase builds on [Stable Diffusion](https://github.com/CompVis/stable-diffusion), [LoRA](https://github.com/cloneofsimo/lora), and [T2I-Adapter](https://github.com/TencentARC/T2I-Adapter). 
+Thanks the authors for sharing their awesome codebases! 
+
+
 ## 📢 Disclaimer
 We develop this repository for RESEARCH purposes, so it can only be used for personal/research/non-commercial purposes.
 ****
