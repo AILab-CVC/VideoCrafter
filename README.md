@@ -254,7 +254,34 @@ pip install -r requirements_xformer.txt
 </details>
 
 ### 3. VideoControl
-⏳⏳⏳ Comming soon. Please stay tuned!🤗
+1. Same with 1-1: Download pretrained T2V models via [Google Drive](https://drive.google.com/file/d/13ZZTXyAKM3x0tObRQOQWdtnrI2ARWYf_/view?usp=share_link) / [Hugging Face](https://huggingface.co/VideoCrafter/t2v-version-1-1/tree/main/models), and put the `model.ckpt` in `models/base_t2v/model.ckpt`.
+2. Download the Adapter model via [Google Drive](https://drive.google.com/file/d/1mEVVzT-m-GAIrRFicU3ohdbhtSyq88Oo/view?usp=share_link) / [Hugging Face](https://huggingface.co/VideoCrafter/t2v-version-1-1/tree/main/models) and put it in `models/adapter_t2v_depth/adapter.pth`.
+3. Download the [MiDas](https://github.com/isl-org/DPT/releases/download/1_0/dpt_hybrid-midas-501f0c75.pt), and put in `models/adapter_t2v_depth/dpt_hybrid-midas.pt`. 
+4. Input the following commands in terminal, it will start running in the GPU 0.
+```bash
+  PROMPT="An ostrich walking in the desert, photorealistic, 4k"
+  VIDEO="input/flamingo.mp4"
+  OUTDIR="results/"
+
+  NAME="video_adapter"
+  CONFIG_PATH="models/adapter_t2v_depth/model_config.yaml"
+  BASE_PATH="models/base_t2v/model.ckpt"
+  ADAPTER_PATH="models/adapter_t2v_depth/adapter.pth"
+
+  python scripts/sample_text2video_adapter.py \
+      --seed 123 \
+      --ckpt_path $BASE_PATH \
+      --adapter_ckpt $ADAPTER_PATH \
+      --base $CONFIG_PATH \
+      --savedir $OUTDIR/$NAME \
+      --bs 1 --height 256 --width 256 \
+      --frame_stride -1 \
+      --unconditional_guidance_scale 15.0 \
+      --ddim_steps 50 \
+      --ddim_eta 1.0 \
+      --prompt "$PROMPT" \
+      --video $VIDEO
+```
 
 ### 4. Gradio demo
 1. We provide a gradio-based web interface for convenient inference, which currently supports the pretrained T2V model and several VideoLoRA models. After installing the environment and downloading the model to the appropriate location, you can launch the local web service with the following script.
@@ -381,7 +408,7 @@ pip install -r requirements_xformer.txt
 If your have any comments or questions, feel free to contact [Yingqing He](yhebm@connect.ust.hk), [Haoxin Chen](jszxchx@126.com) or [Menghan Xia](menghanxyz@gmail.com).
 
 ## 🤗 Acknowledgements
-Our codebase builds on [Stable Diffusion](https://github.com/CompVis/stable-diffusion), [LoRA](https://github.com/cloneofsimo/lora), and [T2I-Adapter](https://github.com/TencentARC/T2I-Adapter). 
+Our codebase builds on [Stable Diffusion](https://github.com/CompVis/stable-diffusion), [LoRA](https://github.com/cloneofsimo/lora), [T2I-Adapter](https://github.com/TencentARC/T2I-Adapter), and [MiDaS](https://github.com/isl-org/MiDaS). 
 Thanks the authors for sharing their awesome codebases! 
 
 

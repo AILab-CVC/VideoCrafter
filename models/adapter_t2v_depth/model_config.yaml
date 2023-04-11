@@ -75,7 +75,7 @@ model:
       target: extralibs.midas.api.MiDaSInference
       params:
         model_type: "dpt_hybrid"
-        model_path: models/adapter_t2v_depth/dpt_hybrid-midas-501f0c75.pt
+        model_path: models/adapter_t2v_depth/dpt_hybrid-midas.pt
 
     adapter_config:
         target: lvdm.models.modules.adapter.Adapter
