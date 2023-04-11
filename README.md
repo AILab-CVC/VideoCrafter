@@ -137,6 +137,45 @@ conda activate lvdm
 pip install -r requirements_xformer.txt
 ```
 
+
+<details><summary>CLICK ME to check the cost of GPU memory and sampling time</summary>
+We tested the sampling_text2video.sh on RTX 3090 and A100 GPUs in two environments.  
+The minimum requirement for GPU memory is at least 7GB.
+<table class="center">
+  <td style="text-align:center;">GPU Name</td>
+  <td style="text-align:center;">CUDA Version</td>
+  <td style="text-align:center;">Environment</td>
+  <td style="text-align:center;">GPU Memory</td>
+  <td style="text-align:center;">Sampling Time (s)</td>
+  <tr>
+  <td style="text-align:center;">RTX 3090</td>
+  <td style="text-align:center;">10.1</td>
+  <td style="text-align:center;">no xformer</td>
+  <td style="text-align:center;">8073M</td>
+  <td style="text-align:center;">30</td>
+  <tr>
+  <td style="text-align:center;">↑</td>
+  <td style="text-align:center;">↑</td>
+  <td style="text-align:center;">with xformer</td>
+  <td style="text-align:center;">6867M</td>
+  <td style="text-align:center;">20</td>
+  <tr>
+  <td style="text-align:center;">A100</td>
+  <td style="text-align:center;">11.3</td>
+  <td style="text-align:center;">no xformer</td>
+  <td style="text-align:center;">9140M</td>
+  <td style="text-align:center;">19</td>
+  <tr>
+  <td style="text-align:center;">↑</td>
+  <td style="text-align:center;">↑</td>
+  <td style="text-align:center;">with xformer</td>
+  <td style="text-align:center;">8052M</td>
+  <td style="text-align:center;">17</td>
+</tr>
+</table >
+↑ indicates the same as the previous row.
+</details>
+
 <br>  
 
 ## 💫 Inference 
