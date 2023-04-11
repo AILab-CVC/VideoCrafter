@@ -629,7 +629,7 @@ class UNetModel(nn.Module):
         self.middle_block.apply(convert_module_to_f32)
         self.output_blocks.apply(convert_module_to_f32)
 
-    def forward(self, x, timesteps=None, time_emb_replace=None, context=None, y=None, **kwargs):
+    def forward(self, x, timesteps=None, time_emb_replace=None, context=None, features_adapter=None, y=None, **kwargs):
         """
         Apply the model to an input batch.
         :param x: an [N x C x ...] Tensor of inputs.
@@ -651,9 +651,17 @@ class UNetModel(nn.Module):
             emb = emb + self.label_emb(y)
 
         h = x.type(self.dtype)
-        for module in self.input_blocks:
+        adapter_idx = 0
+        for id, module in enumerate(self.input_blocks):
             h = module(h, emb, context, **kwargs)
+            ## plug-in adapter features
+            if ((id+1)%3 == 0) and features_adapter is not None:
+                h = h + features_adapter[adapter_idx]
+                adapter_idx += 1
             hs.append(h)
+        if features_adapter is not None:
+            assert len(features_adapter)==adapter_idx, 'Mismatch features adapter'
+
         h = self.middle_block(h, emb, context, **kwargs)
         for module in self.output_blocks:
             h = th.cat([h, hs.pop()], dim=1)

@@ -197,7 +197,7 @@ class DDIMSampler(object):
     def p_sample_ddim(self, x, c, t, index, repeat_noise=False, use_original_steps=False, quantize_denoised=False,
                       temperature=1., noise_dropout=0., score_corrector=None, corrector_kwargs=None,
                       unconditional_guidance_scale=1., unconditional_conditioning=None, sample_noise=None,
-                      cond_fn=None,uc_type=None, model_kwargs={}, 
+                      cond_fn=None, uc_type=None, 
                       **kwargs,
                       ):
         b, *_, device = *x.shape, x.device
@@ -206,15 +206,15 @@ class DDIMSampler(object):
         else:
             is_video = False
         if unconditional_conditioning is None or unconditional_guidance_scale == 1.:
-            e_t = self.model.apply_model(x, t, c, **model_kwargs) # unet denoiser
+            e_t = self.model.apply_model(x, t, c, **kwargs) # unet denoiser
         else:
             # with unconditional condition
             if isinstance(c, torch.Tensor):
-                e_t = self.model.apply_model(x, t, c, **model_kwargs)
-                e_t_uncond = self.model.apply_model(x, t, unconditional_conditioning, **model_kwargs)
+                e_t = self.model.apply_model(x, t, c, **kwargs)
+                e_t_uncond = self.model.apply_model(x, t, unconditional_conditioning, **kwargs)
             elif isinstance(c, dict):
-                e_t = self.model.apply_model(x, t, c, **model_kwargs)
-                e_t_uncond = self.model.apply_model(x, t, unconditional_conditioning, **model_kwargs)
+                e_t = self.model.apply_model(x, t, c, **kwargs)
+                e_t_uncond = self.model.apply_model(x, t, unconditional_conditioning, **kwargs)
             else:
                 raise NotImplementedError
             # text cfg

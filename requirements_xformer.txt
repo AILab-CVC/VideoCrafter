@@ -17,4 +17,5 @@ moviepy
 av
 xformers
 gradio
+timm
 -e .

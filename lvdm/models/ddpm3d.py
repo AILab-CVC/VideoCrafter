@@ -1432,3 +1432,53 @@ class DiffusionWrapper(pl.LightningModule):
 
         return out
 
+
+class T2VAdapterDepth(LatentDiffusion):
+    def __init__(self, depth_stage_config, adapter_config, *args, **kwargs):
+        super(T2VAdapterDepth, self).__init__(*args, **kwargs)
+        self.adapter = instantiate_from_config(adapter_config)
+        self.condtype = adapter_config.cond_name
+        self.depth_stage_model = instantiate_from_config(depth_stage_config)
+
+    def prepare_midas_input(self, batch_x):
+        # input: b,c,h,w
+        x_midas = torch.nn.functional.interpolate(batch_x, size=(384, 384), mode='bicubic')
+        return x_midas
+    
+    @torch.no_grad()
+    def get_batch_depth(self, batch_x, target_size, encode_bs=1):
+        b, c, t, h, w = batch_x.shape
+        merge_x = rearrange(batch_x, 'b c t h w -> (b t) c h w')
+        split_x = torch.split(merge_x, encode_bs, dim=0)
+        cond_depth_list = []
+        for x in split_x:
+            x_midas = self.prepare_midas_input(x)
+            cond_depth = self.depth_stage_model(x_midas)
+            cond_depth = torch.nn.functional.interpolate(
+                    cond_depth,
+                    size=target_size,
+                    mode="bicubic",
+                    align_corners=False,
+                )
+            depth_min, depth_max = torch.amin(cond_depth, dim=[1, 2, 3], keepdim=True), torch.amax(cond_depth, dim=[1, 2, 3], keepdim=True)
+            cond_depth = 2. * (cond_depth - depth_min) / (depth_max - depth_min + 1e-7) - 1.
+            cond_depth_list.append(cond_depth)
+        batch_cond_depth=torch.cat(cond_depth_list, dim=0)
+        batch_cond_depth = rearrange(batch_cond_depth, '(b t) c h w -> b c t h w', b=b, t=t)
+        return batch_cond_depth
+    
+    def get_adapter_features(self, extra_cond, encode_bs=1):
+        b, c, t, h, w = extra_cond.shape
+        ## process in 2D manner
+        merge_extra_cond = rearrange(extra_cond, 'b c t h w -> (b t) c h w')
+        split_extra_cond = torch.split(merge_extra_cond, encode_bs, dim=0)
+        features_adapter_list = []
+        for extra_cond in split_extra_cond:
+            features_adapter = self.adapter(extra_cond)
+            features_adapter_list.append(features_adapter)
+        merge_features_adapter_list = []
+        for i in range(len(features_adapter_list[0])):
+            merge_features_adapter = torch.cat([features_adapter_list[num][i] for num in range(len(features_adapter_list))], dim=0)
+            merge_features_adapter_list.append(merge_features_adapter)
+        merge_features_adapter_list = [rearrange(feature, '(b t) c h w -> b c t h w', b=b, t=t) for feature in merge_features_adapter_list]
+        return merge_features_adapter_list
