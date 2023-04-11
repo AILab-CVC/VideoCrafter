@@ -5,3 +5,7 @@ __pycache__
 
 results
 *.ckpt
+
+*.pt
+*.pth
+.ipynb_checkpoints

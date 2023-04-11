@@ -16,4 +16,5 @@ tqdm==4.65.0
 transformers==4.25.1
 moviepy
 av
+timm
 -e .
