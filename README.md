@@ -102,6 +102,7 @@ input text: `Ironman is fighting against the enemy, big fire in the background, 
 - [ ] Technical report
 - [ ] Release new base model with NO WATERMARK
 - [ ] Release training code for VideoLoRA
+- [ ] Release 512x512 high-resolution version of VideoControl model
 - [ ] More customized models
 
 <br>  
