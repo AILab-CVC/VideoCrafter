@@ -34,7 +34,8 @@ def load_model(config, ckpt_path, gpu_id=None, inject_lora=False, lora_scale=1.0
     if gpu_id is not None:
         model.to(f"cuda:{gpu_id}")
     else:
-        model.cuda()
+        if torch.cuda.is_available():
+            model.cuda()
     model.eval()
 
     return model, global_step, epoch
