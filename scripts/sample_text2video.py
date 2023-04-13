@@ -38,7 +38,7 @@ def get_parser():
     parser.add_argument("--cfg_scale", type=float, default=15.0, help="classifier-free guidance scale")
     parser.add_argument("--seed", type=int, default=None, help="fix a seed for randomness (If you want to reproduce the sample results)")
     parser.add_argument("--show_denoising_progress", action='store_true', default=False, help="whether show denoising progress during sampling one batch",)
-    parser.add_argument("--num_frames", type=int, default=16, help="number of input frames")
+    parser.add_argument("--num_frames", type=int, default=16, help="number of frames of output videos")
     # lora args
     parser.add_argument("--lora_path", type=str, help="lora checkpoint path")
     parser.add_argument("--inject_lora", action='store_true', default=False, help="",)

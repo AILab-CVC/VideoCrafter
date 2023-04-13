@@ -214,11 +214,14 @@ The minimum requirement for GPU memory is at least 7GB.
 
 
 <details><summary>CLICK ME for more options </summary>
+Set device:
 
-- `gpu_id`: specify the gpu index you want to use
-- `ddp`: better to enable it if you have multiple GPUs 
+- `--gpu_id`: specify the gpu index you want to use
+- `--ddp`: better to enable it if you have multiple GPUs 
 - We also provide a reference shell script for using multiple GPUs via PyTorch DDP in `sample_text2video_multiGPU.sh`
 
+Change video duration:
+- `--num_frames`: specify the number of frames of output videos, such as 64 frames
 </details>
 
 
@@ -332,6 +335,16 @@ The minimum requirement for GPU memory is at least 7GB.
       --prompt "$PROMPT" \
       --video $VIDEO
 ```
+
+
+<details><summary>CLICK ME for more options </summary>
+Set device:
+
+- Use multiple GPUs: `bash sample_adapter_multiGPU.sh`
+
+Change video duration:
+- `--num_frames`: specify the number of frames of output videos, such as 64 frames
+</details>
 
 ### 4. Gradio demo
 1. We provide a gradio-based web interface for convenient inference, which currently supports the pretrained T2V model and several VideoLoRA models. After installing the environment and downloading the model to the appropriate location, you can launch the local web service with the following script.

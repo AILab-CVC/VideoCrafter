@@ -192,7 +192,7 @@ def get_parser():
     parser.add_argument("--unconditional_guidance_scale", type=float, default=1.0, help="prompt classifier-free guidance")
     parser.add_argument("--unconditional_guidance_scale_temporal", type=float, default=None, help="temporal consistency guidance")
     parser.add_argument("--seed", type=int, default=2023, help="seed for seed_everything")
-    parser.add_argument("--num_frames", type=int, default=16, help="number of input frames")    
+    parser.add_argument("--num_frames", type=int, default=16, help="number of frames of output videos")    
     return parser
 
 
