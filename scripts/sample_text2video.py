@@ -38,6 +38,7 @@ def get_parser():
     parser.add_argument("--cfg_scale", type=float, default=15.0, help="classifier-free guidance scale")
     parser.add_argument("--seed", type=int, default=None, help="fix a seed for randomness (If you want to reproduce the sample results)")
     parser.add_argument("--show_denoising_progress", action='store_true', default=False, help="whether show denoising progress during sampling one batch",)
+    parser.add_argument("--num_frames", type=int, default=16, help="number of input frames")
     # lora args
     parser.add_argument("--lora_path", type=str, help="lora checkpoint path")
     parser.add_argument("--inject_lora", action='store_true', default=False, help="",)
@@ -94,6 +95,7 @@ def sample_text2video(model, prompt, n_samples, batch_size,
                       decode_frame_bs=1,
                       ddp=False, all_gather=True, 
                       batch_progress=True, show_denoising_progress=False,
+                      num_frames=None,
                       ):
     # get cond vector
     assert(model.cond_stage_model is not None)
@@ -105,7 +107,7 @@ def sample_text2video(model, prompt, n_samples, batch_size,
     n_iter = math.ceil(n_samples / batch_size)
     iterator  = trange(n_iter, desc="Sampling Batches (text-to-video)") if batch_progress else range(n_iter)
     for _ in iterator:
-        noise_shape = make_model_input_shape(model, batch_size)
+        noise_shape = make_model_input_shape(model, batch_size, T=num_frames)
         samples_latent = sample_denoising_batch(model, noise_shape, cond_embd,
                                             sample_type=sample_type,
                                             sampler=sampler,
@@ -240,6 +242,7 @@ def main():
                           cfg_scale=opt.cfg_scale,
                           decode_frame_bs=opt.decode_frame_bs,
                           ddp=opt.ddp, show_denoising_progress=opt.show_denoising_progress,
+                          num_frames=opt.num_frames,
                           )
         # save
         if (opt.ddp and dist.get_rank() == 0) or (not opt.ddp):

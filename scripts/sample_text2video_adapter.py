@@ -153,12 +153,12 @@ def run_inference(args, gpu_idx):
     h, w = args.height // 8, args.width // 8
     channels = model.channels
     frames = model.temporal_length
-    noise_shape = [args.bs, channels, frames, h, w]
+    noise_shape = [args.bs, channels, args.num_frames, h, w]
     
     ## inference
     start = time.time()
     prompt = args.prompt
-    video = load_video(args.video, args.frame_stride, video_size=(args.height, args.width), video_frames=16)
+    video = load_video(args.video, args.frame_stride, video_size=(args.height, args.width), video_frames=args.num_frames)
     video = video.unsqueeze(0).to("cuda")
     with torch.no_grad():
         batch_samples, batch_conds = adapter_guided_synthesis(model, prompt, video, noise_shape, args.n_samples, args.ddim_steps, args.ddim_eta, \
@@ -192,6 +192,7 @@ def get_parser():
     parser.add_argument("--unconditional_guidance_scale", type=float, default=1.0, help="prompt classifier-free guidance")
     parser.add_argument("--unconditional_guidance_scale_temporal", type=float, default=None, help="temporal consistency guidance")
     parser.add_argument("--seed", type=int, default=2023, help="seed for seed_everything")
+    parser.add_argument("--num_frames", type=int, default=16, help="number of input frames")    
     return parser
 
 
