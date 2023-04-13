@@ -96,7 +96,7 @@ input text: `Ironman is fighting against the enemy, big fire in the background, 
 - __[2023.04.07]__: Hugging Face Gradio demo and Colab demo released.
 - __[2023.04.11]__: Release the VideoControl model for depth-guided video generation.
 - __[2023.04.12]__: 🔥 VideoControl is on Hugging Face now!
-
+- __[2023.04.13]__: 🔥 VideoControl supports different resolutions and up to 8-second text-to-video generation. 
 
 <br>
 
