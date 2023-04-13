@@ -8,6 +8,10 @@
 [![GitHub](https://img.shields.io/github/stars/VideoCrafter/VideoCrafter?style=social)](https://github.com/VideoCrafter/VideoCrafter)
 
 
+### 🔥🔥 Highlight: VideoControl supports different input sizes and 8-second text-to-video generation  
+<a href='https://www.youtube.com/watch?v=SJ_TOVjn5zs'> <img src=assets/iron-man-dancing-64.gif width="510"> </a>
+
+
 ## 🔆 Introduction   ([Showcases](https://github.com/VideoCrafter/VideoCrafter-gallery-showcase))
 
 🤗🤗🤗 VideoCrafter is an open-source video generation and editing toolbox for crafting video content.   
@@ -88,7 +92,7 @@ input text: `Ironman is fighting against the enemy, big fire in the background, 
 ## 📝 Changelog
 - __[2023.04.05]__: Release pretrained Text-to-Video models, VideoLora models, and inference code.
 - __[2023.04.07]__: Hugging Face Gradio demo and Colab demo released.
-- __[2023.04.11]__: 🔥 Release the VideoControl model for depth-guided video generation.
+- __[2023.04.11]__: Release the VideoControl model for depth-guided video generation.
 - __[2023.04.12]__: 🔥 VideoControl is on Hugging Face now!
 
 
