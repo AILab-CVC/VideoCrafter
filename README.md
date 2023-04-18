@@ -97,16 +97,16 @@ input text: `Ironman is fighting against the enemy, big fire in the background, 
 - __[2023.04.11]__: Release the VideoControl model for depth-guided video generation.
 - __[2023.04.12]__: 🔥 VideoControl is on Hugging Face now!
 - __[2023.04.13]__: 🔥 VideoControl supports different resolutions and up to 8-second text-to-video generation. 
-
+- __[2023.04.18]__: 🔥 Release [a new base T2V model](https://huggingface.co/VideoCrafter/t2v-version-1-1/blob/main/models/base_t2v/model_rm_wtm.ckpt) and [a VideoControl model](https://huggingface.co/VideoCrafter/t2v-version-1-1/blob/main/models/adapter_t2v_depth/adapter_t2v_depth_rm_wtm.pth) with most of the watermarks removed! The LoRA models can be directly combined with the new T2V model.
 <br>
 
 <!--  -->
 ## ⏳ TODO
 - [x] Hugging Face Gradio demo & Colab 
-- [X] Release the VideoControl model for depth
+- [x] Release the VideoControl model for depth
+- [x] Release new base model with NO WATERMARK
 - [ ] Release VideoControl models for other types, such as canny and pose
 - [ ] Technical report
-- [ ] Release new base model with NO WATERMARK
 - [ ] Release training code for VideoLoRA
 - [ ] Release 512x512 high-resolution version of VideoControl model
 - [ ] More customized models
