@@ -10,7 +10,13 @@
 
 ### 🔥🔥 We are hiring research interns for publishing high-quality research papers! Please send an email if you are interested: shadowcun@tencent.com.
 
+### Shoot your film with VideoCrafter!
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/QDNm1UG5fNc/0.jpg)](https://www.youtube.com/watch?v=QDNm1UG5fNc)
+
+<!-- -->
 ### 🔥🔥 Highlight: VideoControl supports different resolutions and 8-second text-to-video generation  
+
+
 <a href='https://www.youtube.com/watch?v=SJ_TOVjn5zs'> <img src=assets/let-dance-64.gif width="1000"> </a>
 
 
