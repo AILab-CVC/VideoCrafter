@@ -228,24 +228,6 @@ class Normalization(nn.Module):
         return out
 
 
-class CCNormalization(nn.Module):
-    def __init__(self, embed_dim, feature_dim, *args, **kwargs):
-        super(CCNormalization, self).__init__()
-
-        self.embed_dim = embed_dim
-        self.feature_dim = feature_dim
-        self.norm = Normalization(feature_dim, *args, **kwargs)
-        
-        self.gain = nn.Linear(self.embed_dim, self.feature_dim)
-        self.bias = nn.Linear(self.embed_dim, self.feature_dim)
-        
-    def forward(self, x, y):
-        shape = [1] * (x.dim() - 2)
-        gain = (1 + self.gain(y)).view(y.size(0), -1, *shape)
-        bias = self.bias(y).view(y.size(0), -1, *shape)
-        return self.norm(x) * gain + bias
-
-
 def nonlinearity(type='silu'):
     if type == 'silu':
         return nn.SiLU()

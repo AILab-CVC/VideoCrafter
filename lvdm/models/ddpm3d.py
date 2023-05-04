@@ -598,10 +598,6 @@ class LatentDiffusion(DDPM):
                           linear_start=1e-4, linear_end=2e-2, cosine_s=8e-3):
         super().register_schedule(given_betas, beta_schedule, timesteps, linear_start, linear_end, cosine_s)
 
-        self.shorten_cond_schedule = self.num_timesteps_cond > 1
-        if self.shorten_cond_schedule:
-            self.make_cond_schedule()
-
     def instantiate_first_stage(self, config):
         model = instantiate_from_config(config)
         self.first_stage_model = model.eval()
@@ -672,11 +668,6 @@ class LatentDiffusion(DDPM):
             else:
                 xc = x
             
-            # if static video
-            if self.static_video:
-                xc_ = [c + ' (static)' for c in xc]
-                xc = xc_
-            
             # get learned condition.
             # can directly skip it: c = xc
             if self.cond_stage_config is not None and (not self.cond_stage_trainable or force_c_encode):
@@ -686,29 +677,10 @@ class LatentDiffusion(DDPM):
             else:
                 c = xc
 
-            if self.classfier_free_guidance:
-                if cond_key in ['caption', "txt"] and self.uncond_type == 'empty_seq':
-                    for i, ci in enumerate(c):
-                        if random.random() < self.prob:
-                            c[i] = ""
-                elif cond_key == 'class_label' and self.uncond_type == 'zero_embed':
-                    pass
-                elif cond_key == 'class_label' and self.uncond_type == 'learned_embed':
-                    import pdb;pdb.set_trace()
-                    for i, ci in enumerate(c):
-                        if random.random() < self.prob:
-                            c[i]['class_label'] = self.n_classes
-                    
-                else:
-                    raise NotImplementedError
-                
-            if self.zero_cond_embed:
-                import pdb;pdb.set_trace()
-                c = torch.zeros_like(c)
 
             # process c
             if bs is not None:
-                if (is_imgs and not self.static_video):
+                if is_imgs:
                     c = c[:bs*self.temporal_length] # each random img (in T axis) has a corresponding prompt
                 else:
                     c = c[:bs]
@@ -721,22 +693,17 @@ class LatentDiffusion(DDPM):
 
     @torch.no_grad()
     def get_input(self, batch, k, return_first_stage_outputs=False, force_c_encode=False,
-                  cond_key=None, return_original_cond=False, bs=None, mask_temporal=False):
+                  cond_key=None, return_original_cond=False, bs=None):
         """ Get input in LDM 
         """
         # get input imgaes
         x = super().get_input(batch, k) # k = first_stage_key=image
         is_imgs = True if k == 'jpg' else False
         if is_imgs:
-            if self.static_video:
-                # repeat single img to a static video
-                x = x.unsqueeze(2) # bchw -> bc1hw
-                x = x.repeat(1,1,self.temporal_length,1,1) # bc1hw -> bcthw
-            else:
-                # rearrange to videos with T random img
-                bs_load = x.shape[0] // self.temporal_length
-                x = x[:bs_load*self.temporal_length, ...]
-                x = rearrange(x, '(b t) c h w -> b c t h w', t=self.temporal_length, b=bs_load)
+            # rearrange to videos with T random img
+            bs_load = x.shape[0] // self.temporal_length
+            x = x[:bs_load*self.temporal_length, ...]
+            x = rearrange(x, '(b t) c h w -> b c t h w', t=self.temporal_length, b=bs_load)
 
         if bs is not None:
             x = x[:bs]
@@ -748,7 +715,7 @@ class LatentDiffusion(DDPM):
         
         # encode video frames x to z via a 2D encoder
         x = rearrange(x, 'b c t h w -> (b t) c h w')
-        encoder_posterior = self.encode_first_stage(x, mask_temporal)
+        encoder_posterior = self.encode_first_stage(x)
         z = self.get_first_stage_encoding(encoder_posterior).detach()
         z = rearrange(z, '(b t) c h w -> b c t h w', b=b, t=t)
         
@@ -757,7 +724,7 @@ class LatentDiffusion(DDPM):
         out = [z, c]
         
         if return_first_stage_outputs:
-            xrec = self.decode_first_stage(z, mask_temporal=mask_temporal)
+            xrec = self.decode_first_stage(z)
             out.extend([x_ori, xrec])
         if return_original_cond:
             if isinstance(xc, torch.Tensor) and xc.dim() == 4:
@@ -836,17 +803,9 @@ class LatentDiffusion(DDPM):
             assert c is not None
             if self.cond_stage_trainable:
                 c = self.get_learned_conditioning(c)
-            if self.classfier_free_guidance and self.uncond_type == 'zero_embed':
-                for i, ci in enumerate(c):
-                    if random.random() < self.prob:
-                        c[i] = torch.zeros_like(c[i])
-            if self.shorten_cond_schedule:  # TODO: drop this option
-                tc = self.cond_ids[t].to(self.device)
-                c = self.q_sample(x_start=c, t=tc, noise=torch.randn_like(c.float()))
-        
         return self.p_losses(x, c, t, *args, **kwargs)
 
-    def apply_model(self, x_noisy, t, cond, return_ids=False, **kwargs):
+    def apply_model(self, x_noisy, t, cond, **kwargs):
 
         if isinstance(cond, dict):
             # hybrid case, cond is exptected to be a dict
@@ -859,10 +818,9 @@ class LatentDiffusion(DDPM):
 
         x_recon = self.model(x_noisy, t, **cond, **kwargs)
 
-        if isinstance(x_recon, tuple) and not return_ids:
+        if isinstance(x_recon, tuple):
             return x_recon[0]
-        else:
-            return x_recon
+        return x_recon
 
     def _predict_eps_from_xstart(self, x_t, t, pred_xstart):
         return (extract_into_tensor(self.sqrt_recip_alphas_cumprod, t, x_t.shape) * x_t - pred_xstart) / \
@@ -921,23 +879,23 @@ class LatentDiffusion(DDPM):
 
         return loss, loss_dict
 
-    def p_mean_variance(self, x, c, t, clip_denoised: bool, return_codebook_ids=False, quantize_denoised=False,
+    def p_mean_variance(self, x, c, t, clip_denoised: bool, 
                         return_x0=False, score_corrector=None, corrector_kwargs=None, 
                         unconditional_guidance_scale=1., unconditional_conditioning=None,
                         uc_type=None,):
         t_in = t
         if unconditional_conditioning is None or unconditional_guidance_scale == 1.:
-            model_out = self.apply_model(x, t_in, c, return_ids=return_codebook_ids)
+            model_out = self.apply_model(x, t_in, c)
         else:
             # with unconditional condition
             if isinstance(c, torch.Tensor):
                 x_in = torch.cat([x] * 2)
                 t_in = torch.cat([t] * 2)
                 c_in = torch.cat([unconditional_conditioning, c])
-                model_out_uncond, model_out = self.apply_model(x_in, t_in, c_in, return_ids=return_codebook_ids).chunk(2)
+                model_out_uncond, model_out = self.apply_model(x_in, t_in, c_in).chunk(2)
             elif isinstance(c, dict):
-                model_out = self.apply_model(x, t, c, return_ids=return_codebook_ids)
-                model_out_uncond = self.apply_model(x, t, unconditional_conditioning, return_ids=return_codebook_ids)
+                model_out = self.apply_model(x, t, c)
+                model_out_uncond = self.apply_model(x, t, unconditional_conditioning)
             else:
                 raise NotImplementedError
             if uc_type is None:
@@ -954,9 +912,6 @@ class LatentDiffusion(DDPM):
             assert self.parameterization == "eps"
             model_out = score_corrector.modify_score(self, model_out, x, t, c, **corrector_kwargs)
 
-        if return_codebook_ids:
-            model_out, logits = model_out
-
         if self.parameterization == "eps":
             x_recon = self.predict_start_from_noise(x, t=t, noise=model_out)
         elif self.parameterization == "x0":
@@ -966,34 +921,26 @@ class LatentDiffusion(DDPM):
 
         if clip_denoised:
             x_recon.clamp_(-1., 1.)
-        if quantize_denoised:
-            x_recon, _, [_, _, indices] = self.first_stage_model.quantize(x_recon)
         model_mean, posterior_variance, posterior_log_variance = self.q_posterior(x_start=x_recon, x_t=x, t=t)
-        if return_codebook_ids:
-            return model_mean, posterior_variance, posterior_log_variance, logits
-        elif return_x0:
+        if return_x0:
             return model_mean, posterior_variance, posterior_log_variance, x_recon
         else:
             return model_mean, posterior_variance, posterior_log_variance
 
     @torch.no_grad()
     def p_sample(self, x, c, t, clip_denoised=False, repeat_noise=False,
-                 return_codebook_ids=False, quantize_denoised=False, return_x0=False,
+                 return_x0=False,
                  temperature=1., noise_dropout=0., score_corrector=None, corrector_kwargs=None,
                  unconditional_guidance_scale=1., unconditional_conditioning=None,
                  uc_type=None,):
         b, *_, device = *x.shape, x.device
         outputs = self.p_mean_variance(x=x, c=c, t=t, clip_denoised=clip_denoised,
-                                       return_codebook_ids=return_codebook_ids,
-                                       quantize_denoised=quantize_denoised,
                                        return_x0=return_x0,
                                        score_corrector=score_corrector, corrector_kwargs=corrector_kwargs,
                                        unconditional_guidance_scale=unconditional_guidance_scale, 
                                        unconditional_conditioning=unconditional_conditioning,
                                        uc_type=uc_type,)
-        if return_codebook_ids:
-            raise DeprecationWarning("Support dropped.")
-        elif return_x0:
+        if return_x0:
             model_mean, _, model_log_variance, x0 = outputs
         else:
             model_mean, _, model_log_variance = outputs
@@ -1004,15 +951,13 @@ class LatentDiffusion(DDPM):
         
         nonzero_mask = (1 - (t == 0).float()).reshape(b, *((1,) * (len(x.shape) - 1)))
 
-        if return_codebook_ids:
-            return model_mean + nonzero_mask * (0.5 * model_log_variance).exp() * noise, logits.argmax(dim=1)
         if return_x0:
             return model_mean + nonzero_mask * (0.5 * model_log_variance).exp() * noise, x0
         else:
             return model_mean + nonzero_mask * (0.5 * model_log_variance).exp() * noise
 
     @torch.no_grad()
-    def progressive_denoising(self, cond, shape, verbose=True, callback=None, quantize_denoised=False,
+    def progressive_denoising(self, cond, shape, verbose=True, callback=None, 
                               img_callback=None, mask=None, x0=None, temperature=1., noise_dropout=0.,
                               score_corrector=None, corrector_kwargs=None, batch_size=None, x_T=None, start_T=None,
                               log_every_t=None):
@@ -1046,14 +991,9 @@ class LatentDiffusion(DDPM):
 
         for i in iterator:
             ts = torch.full((b,), i, device=self.device, dtype=torch.long)
-            if self.shorten_cond_schedule:
-                assert self.model.conditioning_key != 'hybrid'
-                tc = self.cond_ids[ts].to(cond.device)
-                cond = self.q_sample(x_start=cond, t=tc, noise=torch.randn_like(cond))
-
             img, x0_partial = self.p_sample(img, cond, ts,
                                             clip_denoised=self.clip_denoised,
-                                            quantize_denoised=quantize_denoised, return_x0=True,
+                                            return_x0=True,
                                             temperature=temperature[i], noise_dropout=noise_dropout,
                                             score_corrector=score_corrector, corrector_kwargs=corrector_kwargs)
             if mask is not None:
@@ -1069,7 +1009,7 @@ class LatentDiffusion(DDPM):
 
     @torch.no_grad()
     def p_sample_loop(self, cond, shape, return_intermediates=False,
-                      x_T=None, verbose=True, callback=None, timesteps=None, quantize_denoised=False,
+                      x_T=None, verbose=True, callback=None, timesteps=None, 
                       mask=None, x0=None, img_callback=None, start_T=None,
                       log_every_t=None,
                       unconditional_guidance_scale=1., unconditional_conditioning=None,
@@ -1101,14 +1041,8 @@ class LatentDiffusion(DDPM):
 
         for i in iterator:
             ts = torch.full((b,), i, device=device, dtype=torch.long)
-            if self.shorten_cond_schedule:
-                assert self.model.conditioning_key != 'hybrid'
-                tc = self.cond_ids[ts].to(cond.device)
-                cond = self.q_sample(x_start=cond, t=tc, noise=torch.randn_like(cond))
-
             img = self.p_sample(img, cond, ts,
                                 clip_denoised=self.clip_denoised,
-                                quantize_denoised=quantize_denoised,
                                 unconditional_guidance_scale=unconditional_guidance_scale,
                                 unconditional_conditioning=unconditional_conditioning,
                                 uc_type=uc_type)
@@ -1127,7 +1061,7 @@ class LatentDiffusion(DDPM):
 
     @torch.no_grad()
     def sample(self, cond, batch_size=16, return_intermediates=False, x_T=None,
-               verbose=True, timesteps=None, quantize_denoised=False,
+               verbose=True, timesteps=None,
                mask=None, x0=None, shape=None, **kwargs):
         if shape is None:
             shape = (batch_size, self.channels, self.total_length, *self.image_size)
@@ -1140,7 +1074,7 @@ class LatentDiffusion(DDPM):
         return self.p_sample_loop(cond,
                                   shape,
                                   return_intermediates=return_intermediates, x_T=x_T,
-                                  verbose=verbose, timesteps=timesteps, quantize_denoised=quantize_denoised,
+                                  verbose=verbose, timesteps=timesteps, 
                                   mask=mask, x0=x0,)
 
     @torch.no_grad()
@@ -1213,14 +1147,12 @@ class LatentDiffusion(DDPM):
                                            cond_key=cond_key2 if cond_key2 is not None else None,
                                            )
         
-        N_ori = N
         N = min(z.shape[0], N)
         n_row = min(x.shape[0], n_row)
 
         if unconditional_guidance_scale != 1.0:
-            prompts = N * self.temporal_length * [""] if (is_imgs and not self.static_video) else N * [""]
+            prompts = N * self.temporal_length * [""] if is_imgs else N * [""]
             uc = self.get_condition_validate(prompts)
-            
         else:
             uc = None
 
@@ -1246,63 +1178,9 @@ class LatentDiffusion(DDPM):
     def configure_optimizers(self):
         """ configure_optimizers for LatentDiffusion """
         lr = self.learning_rate
+        params = list(self.model.parameters())
         
-        # --------------------------------------------------------------------------------
-        # set parameters
-        if hasattr(self, "only_optimize_empty_parameters") and self.only_optimize_empty_parameters:
-            print("[INFO] Optimize only empty parameters!")
-            assert(hasattr(self, "empty_paras"))
-            params = [p for n, p in self.model.named_parameters() if n in self.empty_paras]
-        elif hasattr(self, "only_optimize_pretrained_parameters") and self.only_optimize_pretrained_parameters:
-            print("[INFO] Optimize only pretrained parameters!")
-            assert(hasattr(self, "empty_paras"))
-            params = [p for n, p in self.model.named_parameters() if n not in self.empty_paras]
-            assert(len(params) != 0)
-        elif getattr(self, "optimize_empty_and_spatialattn", False):
-            print("[INFO] Optimize empty parameters + spatial transformer!")
-            assert(hasattr(self, "empty_paras"))
-            empty_paras = [p for n, p in self.model.named_parameters() if n in self.empty_paras]
-            SA_list = [".attn1.", ".attn2.", ".ff.", ".norm1.", ".norm2.", ".norm3."]
-            SA_params = [p for n, p in self.model.named_parameters() if check_istarget(n, SA_list)]
-            if getattr(self, "spatial_lr_decay", False):
-                params = [
-                    {"params": empty_paras},
-                    {"params": SA_params, "lr": lr * self.spatial_lr_decay}
-                ]
-            else:
-                params = empty_paras + SA_params
-        else:
-            # optimize whole denoiser
-            if hasattr(self, "spatial_lr_decay") and self.spatial_lr_decay:
-                print("[INFO] Optimize the whole net with different lr!")
-                print(f"[INFO] {lr} for empty paras, {lr * self.spatial_lr_decay} for pretrained paras!")
-                empty_paras = [p for n, p in self.model.named_parameters() if n in self.empty_paras]
-                # assert(len(empty_paras) == len(self.empty_paras)) # self.empty_paras:cond_stage_model.embedding.weight not in diffusion model params
-                pretrained_paras = [p for n, p in self.model.named_parameters() if n not in self.empty_paras]
-                params = [
-                    {"params": empty_paras},
-                    {"params": pretrained_paras, "lr": lr * self.spatial_lr_decay}
-                ]
-                print(f"[INFO] Empty paras: {len(empty_paras)}, Pretrained paras: {len(pretrained_paras)}")
-
-            else:
-                params = list(self.model.parameters())
-        
-        if hasattr(self, "generator_trainable") and not self.generator_trainable:
-            # fix unet denoiser
-            params = list()
-
-        if self.inject_unet:
-            params = itertools.chain(*self.lora_require_grad_params)
-                
-        if self.inject_clip:
-            if self.inject_unet:
-                params = list(params)+list(itertools.chain(*self.lora_require_grad_params_clip))
-            else:
-                params = itertools.chain(*self.lora_require_grad_params_clip)
-            
-
-        # append paras
+        # append cond model paras
         # ------------------------------------------------------------------
         def add_cond_model(cond_model, params):
             if isinstance(params[0], dict):
@@ -1312,11 +1190,11 @@ class LatentDiffusion(DDPM):
                 # parameter list: [torch.nn.parameter.Parameter]
                 params = params + list(cond_model.parameters())
             return params
-        # ------------------------------------------------------------------
         
         if self.cond_stage_trainable:
             # print(f"{self.__class__.__name__}: Also optimizing conditioner params!")
             params = add_cond_model(self.cond_stage_model, params)
+        # ------------------------------------------------------------------
         
         if self.learn_logvar:
             print('Diffusion model optimizing logvar')
@@ -1365,11 +1243,9 @@ class DiffusionWrapper(pl.LightningModule):
         self.diffusion_model = instantiate_from_config(diff_model_config)
         print('Successfully initialize the diffusion model !')
         self.conditioning_key = conditioning_key
-        # assert self.conditioning_key in [None, 'concat', 'crossattn', 'hybrid', 'adm', 'resblockcond', 'hybrid-adm', 'hybrid-time']
 
     def forward(self, x, t, c_concat: list = None, c_crossattn: list = None,
                 c_adm=None, s=None, mask=None, **kwargs):
-        # temporal_context = fps is foNone
         if self.conditioning_key is None:
             out = self.diffusion_model(x, t, **kwargs)
         elif self.conditioning_key == 'concat':
@@ -1399,13 +1275,9 @@ class DiffusionWrapper(pl.LightningModule):
             cc = torch.cat(c_crossattn, 1)
             out = self.diffusion_model(xc, t, context=cc, s=s, **kwargs)
         elif self.conditioning_key == 'concat-time-mask':
-            # assert s is not None
-            # print('x & mask:',x.shape,c_concat[0].shape)
             xc = torch.cat([x] + c_concat, dim=1)
             out = self.diffusion_model(xc, t, context=None, s=s, mask=mask, **kwargs)
         elif self.conditioning_key == 'concat-adm-mask':
-            # assert s is not None
-            # print('x & mask:',x.shape,c_concat[0].shape)
             if c_concat is not None:
                 xc = torch.cat([x] + c_concat, dim=1)
             else:
@@ -1422,14 +1294,12 @@ class DiffusionWrapper(pl.LightningModule):
                 xc = x
             out = self.diffusion_model(xc, t, context=cc, y=s, mask=mask, **kwargs)
         elif self.conditioning_key == 'hybrid-time-adm': # adm means y, e.g., class index
-            # assert s is not None
             assert c_adm is not None
             xc = torch.cat([x] + c_concat, dim=1)
             cc = torch.cat(c_crossattn, 1)
             out = self.diffusion_model(xc, t, context=cc, s=s, y=c_adm, **kwargs)
         else:
             raise NotImplementedError()
-
         return out
 
 

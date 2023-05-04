@@ -220,13 +220,10 @@ class DDIMSampler(object):
             # text cfg
             if uc_type is None:
                 e_t = e_t_uncond + unconditional_guidance_scale * (e_t - e_t_uncond)
+            elif uc_type == 'cfg_original':
+                e_t = e_t + unconditional_guidance_scale * (e_t - e_t_uncond)
             else:
-                if uc_type == 'cfg_original':
-                    e_t = e_t + unconditional_guidance_scale * (e_t - e_t_uncond)
-                elif uc_type == 'cfg_ours':
-                    e_t = e_t + unconditional_guidance_scale * (e_t_uncond - e_t)
-                else:
-                    raise NotImplementedError
+                raise NotImplementedError
             
         if score_corrector is not None:
             assert self.model.parameterization == "eps"
