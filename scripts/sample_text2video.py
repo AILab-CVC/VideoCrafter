@@ -250,7 +250,11 @@ def main():
             save_name = prompt_str.replace(" ", "_") if " " in prompt else prompt_str
             if opt.seed is not None:
                 save_name = save_name + f"_seed{seed:05d}"
-            save_results(samples, opt.save_dir, save_name=save_name, save_fps=opt.save_fps)
+            save_results(samples, opt.save_dir, save_name=save_name, 
+                         save_fps=opt.save_fps, save_jpg=opt.save_jpg, 
+                         save_mp4=opt.save_mp4, save_npz=opt.save_npz, 
+                         save_mp4_sheet=opt.save_mp4_sheet
+                         )
     print("Finish sampling!")
     print(f"Run time = {(time.time() - start):.2f} seconds")
 
