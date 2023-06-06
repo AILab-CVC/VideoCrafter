@@ -472,6 +472,19 @@ Change video duration:
 ⏳⏳⏳ Comming soon. We are still working on it.💪
 <br>
 
+## 😉 Citation
+The technical report is currently unavailable as it is still in preparation. You can cite the paper of our base model, on which we built our applications.
+```
+@article{he2022lvdm,
+      title={Latent Video Diffusion Models for High-Fidelity Long Video Generation}, 
+      author={Yingqing He and Tianyu Yang and Yong Zhang and Ying Shan and Qifeng Chen},
+      year={2022},
+      eprint={2211.13221},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
+
 <!-- ## 💗 Related Works -->
 ## 📭 Contact
 If your have any comments or questions, feel free to contact [Yingqing He](yhebm@connect.ust.hk), [Haoxin Chen](jszxchx@126.com) or [Menghan Xia](menghanxyz@gmail.com).
