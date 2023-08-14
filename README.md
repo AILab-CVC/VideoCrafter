@@ -3,21 +3,31 @@
 
 
 <a href='https://arxiv.org/abs/TODO'><img src='https://img.shields.io/badge/Technique Report-TODO-red'></a> 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/VideoCrafter/VideoCrafter/blob/main/quick_demo.ipynb)
-[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/VideoCrafter/VideoCrafter)
+[![Discord](https://img.shields.io/badge/%F0%9F%A4%97%20Discord%20-Floor33-blue)](https://discord.gg/uHaQuThT)
 [![GitHub](https://img.shields.io/github/stars/VideoCrafter/VideoCrafter?style=social)](https://github.com/VideoCrafter/VideoCrafter)
+<!--[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/VideoCrafter/VideoCrafter/blob/main/quick_demo.ipynb) -->
+<!--[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/VideoCrafter/VideoCrafter)-->
 
 
+
+### 🔥🔥 A new version (VideoCrafter-v0.9) is now on [Discord/Floor33](https://discord.gg/uHaQuThT) for high-resolution and high-fidelity video generation.  Please Join us and create your own film. 
+
+ [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/75qdx1EXYYs/0.jpg)](https://www.youtube.com/watch?v=75qdx1EXYYs)
+
+
+
+<!--
 ### 🔥🔥 We are hiring research interns for publishing high-quality research papers! Please send an email if you are interested: shadowcun@tencent.com.
 
 ### Shoot your film with VideoCrafter!
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/QDNm1UG5fNc/0.jpg)](https://www.youtube.com/watch?v=QDNm1UG5fNc)
 
-<!-- -->
+
 ### 🔥🔥 Highlight: VideoControl supports different resolutions and 8-second text-to-video generation  
 
 
 <a href='https://www.youtube.com/watch?v=SJ_TOVjn5zs'> <img src=assets/let-dance-64.gif width="1000"> </a>
+ -->
 
 
 ## 🔆 Introduction   ([Showcases](https://github.com/VideoCrafter/VideoCrafter-gallery-showcase))
@@ -101,9 +111,10 @@ input text: `Ironman is fighting against the enemy, big fire in the background, 
 - __[2023.04.05]__: Release pretrained Text-to-Video models, VideoLora models, and inference code.
 - __[2023.04.07]__: Hugging Face Gradio demo and Colab demo released.
 - __[2023.04.11]__: Release the VideoControl model for depth-guided video generation.
-- __[2023.04.12]__: 🔥 VideoControl is on Hugging Face now!
-- __[2023.04.13]__: 🔥 VideoControl supports different resolutions and up to 8-second text-to-video generation. 
-- __[2023.04.18]__: 🔥 Release [a new base T2V model](https://huggingface.co/VideoCrafter/t2v-version-1-1/blob/main/models/base_t2v/model_rm_wtm.ckpt) and [a VideoControl model](https://huggingface.co/VideoCrafter/t2v-version-1-1/blob/main/models/adapter_t2v_depth/adapter_t2v_depth_rm_wtm.pth) with most of the watermarks removed! The LoRA models can be directly combined with the new T2V model.
+- __[2023.04.12]__:  VideoControl is on Hugging Face now!
+- __[2023.04.13]__:  VideoControl supports different resolutions and up to 8-second text-to-video generation. 
+- __[2023.04.18]__: Release [a new base T2V model](https://huggingface.co/VideoCrafter/t2v-version-1-1/blob/main/models/base_t2v/model_rm_wtm.ckpt) and [a VideoControl model](https://huggingface.co/VideoCrafter/t2v-version-1-1/blob/main/models/adapter_t2v_depth/adapter_t2v_depth_rm_wtm.pth) with most of the watermarks removed! The LoRA models can be directly combined with the new T2V model.
+- __[2023.08.14]__: 🔥 Release a new version of VideoCrafter on [Discord/Floor33](https://discord.gg/uHaQuThT). Please join us to create your own film!
 <br>
 
 <!--  -->
