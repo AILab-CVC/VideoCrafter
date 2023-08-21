@@ -3,14 +3,14 @@
 
 
 <a href='https://arxiv.org/abs/TODO'><img src='https://img.shields.io/badge/Technique Report-TODO-red'></a> 
-[![Discord](https://dcbadge.vercel.app/api/server/un6SE4Xg?style=flat)](https://discord.gg/uHaQuThT)
+[![Discord](https://dcbadge.vercel.app/api/server/9XtTjynm?style=flat)](https://discord.gg/9XtTjynm)
 [![GitHub](https://img.shields.io/github/stars/VideoCrafter/VideoCrafter?style=social)](https://github.com/VideoCrafter/VideoCrafter)
 <!--[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/VideoCrafter/VideoCrafter/blob/main/quick_demo.ipynb) -->
 <!--[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/VideoCrafter/VideoCrafter)-->
 
 
 
-### 🔥🔥 A new version (VideoCrafter-v0.9) is now on [Discord/Floor33](https://discord.gg/uHaQuThT) for high-resolution and high-fidelity video generation.  Please Join us and create your own film. 
+### 🔥🔥 A new version (VideoCrafter-v0.9) is now on [Discord/Floor33](https://discord.gg/9XtTjynm) for high-resolution and high-fidelity video generation.  Please Join us and create your own film. 
 
  [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/75qdx1EXYYs/0.jpg)](https://www.youtube.com/watch?v=75qdx1EXYYs)
 
