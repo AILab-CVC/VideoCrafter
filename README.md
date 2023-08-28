@@ -12,8 +12,11 @@
 
 ### 🔥🔥 A new version (VideoCrafter-v0.9) is now on [Discord/Floor33](https://discord.gg/9XtTjynm) for high-resolution and high-fidelity video generation.  Please Join us and create your own film. 
 
- [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/75qdx1EXYYs/0.jpg)](https://www.youtube.com/watch?v=75qdx1EXYYs)
+### Floor33 | Portraits
+ [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/SqNL88VNTao/0.jpg)](https://www.youtube.com/watch?v=SqNL88VNTao)
 
+### Floor33 | Film
+ [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/4MbTNYug1wo/0.jpg)](https://www.youtube.com/watch?v=4MbTNYug1wo)
 
 
 <!--
