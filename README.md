@@ -53,7 +53,7 @@ Click the GIF to access the high-resolution video.
   <tr>
   <td style="text-align:center;" width="170">"a black swan swims on the pond"</td>
   <td style="text-align:center;" width="170">"a girl is riding a horse fast on grassland"</td>
-  <td style="text-align:center;" width="170">"two kids are playing on the seashore"</td>
+  <td style="text-align:center;" width="170">"a boy sits on a chair facing the sea"</td>
   <td style="text-align:center;" width="170">"two galleons moving in the wind at sunset"</td>
 
 </table >
