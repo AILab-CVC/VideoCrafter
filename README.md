@@ -3,6 +3,7 @@
 
 <a href='https://arxiv.org/abs/TODO'><img src='https://img.shields.io/badge/Technique Report-TODO-red'></a> 
 [![Discord](https://dcbadge.vercel.app/api/server/rrayYqZ4tf?style=flat)](https://discord.gg/rrayYqZ4tf)
+<a href='https://huggingface.co/spaces/VideoCrafter/VideoCrafter'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-blue'></a>
 [![GitHub](https://img.shields.io/github/stars/VideoCrafter/VideoCrafter?style=social)](https://github.com/VideoCrafter/VideoCrafter)
 
 
@@ -62,6 +63,8 @@ Click the GIF to access the high-resolution video.
 ---
 
 ## 📝 Changelog
+- __[2023.10.19]__: Release the 320x512 Text2Video Model, and HuggingFace demo.
+
 - __[2023.10.13]__: 🔥🔥 Release the VideoCrafter1, High Quality Video Generation!
 
 - __[2023.08.14]__: Release a new version of VideoCrafter on [Discord/Floor33](https://discord.gg/uHaQuThT). Please join us to create your own film!
@@ -77,6 +80,7 @@ Click the GIF to access the high-resolution video.
 |Models|Resolution|Checkpoints|
 |:---------|:---------|:--------|
 |Text2Video|576x1024|[Hugging Face](https://huggingface.co/VideoCrafter/Text2Video-1024-v1.0/blob/main/model.ckpt)
+|Text2Video|320x512|[Hugging Face](https://huggingface.co/VideoCrafter/Text2Video-512-v1/blob/main/model.ckpt)
 |Image2Video|320x512|[Hugging Face](https://huggingface.co/VideoCrafter/Image2Video-512-v1.0/blob/main/model.ckpt)
 
 
