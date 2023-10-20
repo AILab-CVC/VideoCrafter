@@ -118,8 +118,17 @@ pip install -r requirements.txt
 <br>
 
 ## 😉 Citation
-The technical report is currently unavailable as it is still in preparation. You can cite the paper of our base model, on which we built our applications.
+The technical report is currently unavailable as it is still in preparation. You can cite the paper of our image-to-video model and related base model.
 ```
+@article{xing2023dynamicrafter,
+      title={DynamiCrafter: Animating Open-domain Images with Video Diffusion Priors}, 
+      author={Jinbo Xing and Menghan Xia and Yong Zhang and Haoxin Chen and Xintao Wang and Tien-Tsin Wong and Ying Shan},
+      year={2023},
+      eprint={2310.12190},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+
 @article{he2022lvdm,
       title={Latent Video Diffusion Models for High-Fidelity Long Video Generation}, 
       author={Yingqing He and Tianyu Yang and Yong Zhang and Ying Shan and Qifeng Chen},
