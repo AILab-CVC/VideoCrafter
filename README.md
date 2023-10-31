@@ -64,6 +64,8 @@ Click the GIF to access the high-resolution video.
 ---
 
 ## 📝 Changelog
+- __[2023.10.30]__: Release [VideoCrafter1](https://arxiv.org/abs/2310.19512) Technical Report!
+
 - __[2023.10.19]__: Release the 320x512 Text2Video Model, and HuggingFace demo.
 
 - __[2023.10.13]__: 🔥🔥 Release the VideoCrafter1, High Quality Video Generation!
@@ -115,12 +117,21 @@ pip install -r requirements.txt
 
 ---
 ## 📋 Techinical Report
-⏳⏳⏳ Comming soon. We are still working on it.💪
+😉 Tech report: [VideoCrafter1: Open Diffusion Models for High-Quality Video Generation](https://arxiv.org/abs/2310.19512)
 <br>
 
 ## 😉 Citation
 The technical report is currently unavailable as it is still in preparation. You can cite the paper of our image-to-video model and related base model.
 ```
+@misc{chen2023videocrafter1,
+      title={VideoCrafter1: Open Diffusion Models for High-Quality Video Generation}, 
+      author={Haoxin Chen and Menghan Xia and Yingqing He and Yong Zhang and Xiaodong Cun and Shaoshu Yang and Jinbo Xing and Yaofang Liu and Qifeng Chen and Xintao Wang and Chao Weng and Ying Shan},
+      year={2023},
+      eprint={2310.19512},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+
 @article{xing2023dynamicrafter,
       title={DynamiCrafter: Animating Open-domain Images with Video Diffusion Priors}, 
       author={Jinbo Xing and Menghan Xia and Yong Zhang and Haoxin Chen and Xintao Wang and Tien-Tsin Wong and Ying Shan},
