@@ -2,7 +2,7 @@
 ## ___***VideoCrafter1: Open Diffusion Models for High-Quality Video Generation***___
 
 <a href='https://ailab-cvc.github.io/videocrafter/'><img src='https://img.shields.io/badge/Project-Page-green'></a> 
-<a href='https://arxiv.org/abs/TODO'><img src='https://img.shields.io/badge/Technique Report-TODO-red'></a> 
+<a href='https://arxiv.org/abs/2310.19512'><img src='https://img.shields.io/badge/Technique-Report-red'></a> 
 [![Discord](https://dcbadge.vercel.app/api/server/rrayYqZ4tf?style=flat)](https://discord.gg/rrayYqZ4tf)
 <a href='https://huggingface.co/spaces/VideoCrafter/VideoCrafter'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-blue'></a>
 [![GitHub](https://img.shields.io/github/stars/VideoCrafter/VideoCrafter?style=social)](https://github.com/VideoCrafter/VideoCrafter)
