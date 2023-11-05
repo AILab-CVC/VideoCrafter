@@ -20,6 +20,6 @@ build:
     - "av==10.0.0"
     - "decord==0.6.0"
     - "kornia==0.7.0"
-    - "open-clip-torch==2.23.0"
+    - "open-clip-torch==2.12.0"
     - "xformers==0.0.21"
 predict: "predict.py:Predictor"

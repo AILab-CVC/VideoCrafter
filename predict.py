@@ -76,10 +76,8 @@ class Predictor(BasePredictor):
         height = 576 if task == "text2video" else 320
         model = self.model_base if task == "text2video" else self.model_i2v
 
-        cond_inputs = None
         if task == "image2video":
             assert image is not None, "Please provide image for image2video generation."
-            cond_inputs = [str(image)]
 
         if seed is None:
             seed = int.from_bytes(os.urandom(2), "big")
@@ -99,7 +97,6 @@ class Predictor(BasePredictor):
             fps=28 if task == "text2video" else 8,
             unconditional_guidance_scale=unconditional_guidance_scale,
             unconditional_guidance_scale_temporal=None,
-            cond_input=cond_inputs,
         )
 
         ## latent noise shape
@@ -116,7 +113,7 @@ class Predictor(BasePredictor):
         if args.mode == "base":
             cond = {"c_crossattn": [text_emb], "fps": fps}
         elif args.mode == "i2v":
-            cond_images = load_image_batch(cond_inputs, (args.height, args.width))
+            cond_images = load_image_batch([str(image)], (args.height, args.width))
             cond_images = cond_images.to(model.device)
             img_emb = model.get_image_embeds(cond_images)
             imtext_cond = torch.cat([text_emb, img_emb], dim=1)
