@@ -120,7 +120,7 @@ class CrossAttention(nn.Module):
             del k_ip
             sim_ip = sim_ip.softmax(dim=-1)
             out_ip = torch.einsum('b i j, b j d -> b i d', sim_ip, v_ip)
-            out_ip = rearrange(out, '(b h) n d -> b n (h d)', h=h)
+            out_ip = rearrange(out_ip, '(b h) n d -> b n (h d)', h=h)
             out = out + self.image_cross_attention_scale * out_ip
         del q
 
