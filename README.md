@@ -83,9 +83,9 @@ Click the GIF to access the high-resolution video.
 
 |Models|Resolution|Checkpoints|
 |:---------|:---------|:--------|
-|Text2Video|576x1024|[Hugging Face](https://huggingface.co/VideoCrafter/Text2Video-1024-v1.0/blob/main/model.ckpt)
-|Text2Video|320x512|[Hugging Face](https://huggingface.co/VideoCrafter/Text2Video-512-v1/blob/main/model.ckpt)
-|Image2Video|320x512|[Hugging Face](https://huggingface.co/VideoCrafter/Image2Video-512-v1.0/blob/main/model.ckpt)
+|Text2Video|576x1024|[Hugging Face](https://huggingface.co/VideoCrafter/Text2Video-1024/blob/main/model.ckpt)
+|Text2Video|320x512|[Hugging Face](https://huggingface.co/VideoCrafter/Text2Video-512/blob/main/model.ckpt)
+|Image2Video|320x512|[Hugging Face](https://huggingface.co/VideoCrafter/Image2Video-512/blob/main/model.ckpt)
 
 
 
@@ -114,6 +114,14 @@ pip install -r requirements.txt
 2) Input the following commands in terminal.
 ```bash
   sh scripts/run_image2video.sh
+```
+
+### 3. Local Gradio demo
+
+1. Download the pretrained T2V and I2V models and put them in the corresponding directory according to the previous guidelines.
+2. Input the following commands in terminal.
+```bash
+  python gradio_app.py
 ```
 
 ---
