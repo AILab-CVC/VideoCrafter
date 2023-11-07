@@ -125,7 +125,7 @@ pip install -r requirements.txt
 ```
 
 ---
-## 📋 Techinical Report
+## 📋 Technical Report
 😉 Tech report: [VideoCrafter1: Open Diffusion Models for High-Quality Video Generation](https://arxiv.org/abs/2310.19512)
 <br>
 
