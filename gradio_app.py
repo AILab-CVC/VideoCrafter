@@ -28,7 +28,8 @@ def videocrafter_demo(result_dir='./tmp/'):
         #######t2v#######
         with gr.Tab(label="Text2Video"):
             with gr.Column():
-                with gr.Row().style(equal_height=False):
+                #with gr.Row().style(equal_height=False):
+                with gr.Row(equal_height=False):
                     with gr.Column():
                         input_text = gr.Text(label='Prompts')
                         with gr.Row():
@@ -40,7 +41,8 @@ def videocrafter_demo(result_dir='./tmp/'):
                         send_btn = gr.Button("Send")
                     with gr.Tab(label='result'):
                         with gr.Row():
-                            output_video_1 =  gr.Video().style(width=512)
+                            #output_video_1 =  gr.Video().style(width=512)
+                            output_video_1 =  gr.Video(width=512)
                 gr.Examples(examples=t2v_examples,
                             inputs=[input_text,steps,cfg_scale,eta],
                             outputs=[output_video_1],
@@ -58,7 +60,8 @@ def videocrafter_demo(result_dir='./tmp/'):
                 with gr.Row():
                     with gr.Column():
                         with gr.Row():
-                            i2v_input_image = gr.Image(label="Input Image").style(width=256)
+                            #i2v_input_image = gr.Image(label="Input Image").style(width=256)
+                            i2v_input_image = gr.Image(label="Input Image",width=256)
                         with gr.Row():
                             i2v_input_text = gr.Text(label='Prompts')
                         with gr.Row():
@@ -70,7 +73,8 @@ def videocrafter_demo(result_dir='./tmp/'):
                         i2v_end_btn = gr.Button("Send")
                     with gr.Tab(label='Result'):
                         with gr.Row():
-                            i2v_output_video = gr.Video(label="Generated Video").style(width=512)
+                            #i2v_output_video = gr.Video(label="Generated Video").style(width=512)
+                            i2v_output_video = gr.Video(label="Generated Video",width=512)
 
                 gr.Examples(examples=i2v_examples,
                             inputs=[i2v_input_image, i2v_input_text, i2v_steps, i2v_cfg_scale, i2v_eta, i2v_fps],
@@ -88,6 +92,6 @@ def videocrafter_demo(result_dir='./tmp/'):
 if __name__ == "__main__":
     result_dir = os.path.join('./', 'results')
     videocrafter_iface = videocrafter_demo(result_dir)
-    videocrafter_iface.queue(concurrency_count=1, max_size=10)
-    videocrafter_iface.launch()
-    # videocrafter_iface.launch(server_name='0.0.0.0', server_port=80)
+    #videocrafter_iface.queue(concurrency_count=1, max_size=10)
+#    videocrafter_iface.launch()
+    videocrafter_iface.launch(server_name='0.0.0.0', server_port=8000,max_threads=10)
