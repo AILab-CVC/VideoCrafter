@@ -2,7 +2,6 @@ import os
 import sys
 import gradio as gr
 from scripts.gradio.t2v_test import Text2Video
-from scripts.gradio.i2v_test import Image2Video
 sys.path.insert(1, os.path.join(sys.path[0], 'lvdm'))
 
 t2v_examples = [
@@ -14,15 +13,11 @@ t2v_examples = [
     ['Robot dancing in times square',25,12,1,16],                    
 ]
 
-i2v_examples = [
-    ['prompts/i2v_prompts/horse.png', 'horses are walking on the grassland', 50, 12, 1, 16]
-]
 
 def videocrafter_demo(result_dir='./tmp/'):
     text2video = Text2Video(result_dir)
-    image2video = Image2Video(result_dir)
     with gr.Blocks(analytics_enabled=False) as videocrafter_iface:
-        gr.Markdown("<div align='center'> <h2> VideoCrafter1: Open Diffusion Models for High-Quality Video Generation </span> </h2> \
+        gr.Markdown("<div align='center'> <h2> VideoCrafter2: Overcoming Data Limitations for High-Quality Video Diffusion Models </span> </h2> \
                      <a style='font-size:18px;color: #000000' href='https://github.com/AILab-CVC/VideoCrafter'> Github </div>")
         
         #######t2v#######
@@ -51,36 +46,6 @@ def videocrafter_demo(result_dir='./tmp/'):
                 fn=text2video.get_prompt, 
                 inputs=[input_text,steps,cfg_scale,eta,fps],
                 outputs=[output_video_1],
-            )
-        #######image2video######
-        with gr.Tab(label='Image2Video'):
-            with gr.Column():
-                with gr.Row():
-                    with gr.Column():
-                        with gr.Row():
-                            i2v_input_image = gr.Image(label="Input Image").style(width=256)
-                        with gr.Row():
-                            i2v_input_text = gr.Text(label='Prompts')
-                        with gr.Row():
-                            i2v_eta = gr.Slider(minimum=0.0, maximum=1.0, step=0.1, label='ETA', value=1.0, elem_id="i2v_eta")
-                            i2v_cfg_scale = gr.Slider(minimum=1.0, maximum=30.0, step=0.5, label='CFG Scale', value=12.0, elem_id="i2v_cfg_scale")
-                        with gr.Row():
-                            i2v_steps = gr.Slider(minimum=1, maximum=60, step=1, elem_id="i2v_steps", label="Sampling steps", value=50)
-                            i2v_fps = gr.Slider(minimum=4, maximum=32, step=1, elem_id="i2v_fps", label="Generative fps", value=16)
-                        i2v_end_btn = gr.Button("Send")
-                    with gr.Tab(label='Result'):
-                        with gr.Row():
-                            i2v_output_video = gr.Video(label="Generated Video").style(width=512)
-
-                gr.Examples(examples=i2v_examples,
-                            inputs=[i2v_input_image, i2v_input_text, i2v_steps, i2v_cfg_scale, i2v_eta, i2v_fps],
-                            outputs=[i2v_output_video],
-                            fn = image2video.get_image,
-                            cache_examples=os.getenv('SYSTEM') == 'spaces',
-                )
-            i2v_end_btn.click(inputs=[i2v_input_image, i2v_input_text, i2v_steps, i2v_cfg_scale, i2v_eta, i2v_fps],
-                            outputs=[i2v_output_video],
-                            fn = image2video.get_image
             )
 
     return videocrafter_iface

@@ -89,7 +89,7 @@ Click the GIF to access the high-resolution video.
 
 |T2V-Models|Resolution|Checkpoints|
 |:---------|:---------|:--------|
-|VideoCrafter2|| Coming soon
+|VideoCrafter2|320x512|[Hugging Face](https://huggingface.co/VideoCrafter/VideoCrafter2/blob/main/model.ckpt)
 |VideoCrafter1|576x1024|[Hugging Face](https://huggingface.co/VideoCrafter/Text2Video-1024/blob/main/model.ckpt)
 |VideoCrafter1|320x512|[Hugging Face](https://huggingface.co/VideoCrafter/Text2Video-512/blob/main/model.ckpt)
 
@@ -112,7 +112,7 @@ pip install -r requirements.txt
 ## 💫 Inference 
 ### 1. Text-to-Video
 
-1) Download pretrained T2V models via [Hugging Face](https://huggingface.co/VideoCrafter/Text2Video-1024-v1.0/blob/main/model.ckpt), and put the `model.ckpt` in `checkpoints/base_1024_v1/model.ckpt`.
+1) Download pretrained T2V models via [Hugging Face](https://huggingface.co/VideoCrafter/VideoCrafter2/blob/main/model.ckpt), and put the `model.ckpt` in `checkpoints/base_512_v2/model.ckpt`.
 2) Input the following commands in terminal.
 ```bash
   sh scripts/run_text2video.sh

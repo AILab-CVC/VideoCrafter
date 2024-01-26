@@ -12,8 +12,8 @@ class Text2Video():
         self.result_dir = result_dir
         if not os.path.exists(self.result_dir):
             os.mkdir(self.result_dir)
-        ckpt_path='checkpoints/base_1024_v1/model.ckpt'
-        config_file='configs/inference_t2v_1024_v1.0.yaml'
+        ckpt_path='checkpoints/base_512_v2/model.ckpt'
+        config_file='configs/inference_t2v_512_v2.0.yaml'
         config = OmegaConf.load(config_file)
         model_config = config.pop("model", OmegaConf.create())
         model_config['params']['unet_config']['params']['use_checkpoint']=False   
@@ -40,7 +40,7 @@ class Text2Video():
         batch_size=1
         channels = model.model.diffusion_model.in_channels
         frames = model.temporal_length
-        h, w = 576 // 8, 1024 // 8
+        h, w = 320 // 8, 512 // 8
         noise_shape = [batch_size, channels, frames, h, w]
 
         # text cond
@@ -60,15 +60,15 @@ class Text2Video():
         return os.path.join(self.result_dir, f"{prompt_str}.mp4")
     
     def download_model(self):
-        REPO_ID = 'VideoCrafter/Text2Video-1024'
+        REPO_ID = 'VideoCrafter/VideoCrafter2'
         filename_list = ['model.ckpt']
-        if not os.path.exists('./checkpoints/base_1024_v1/'):
-            os.makedirs('./checkpoints/base_1024_v1/')
+        if not os.path.exists('./checkpoints/base_512_v2/'):
+            os.makedirs('./checkpoints/base_512_v2/')
         for filename in filename_list:
-            local_file = os.path.join('./checkpoints/base_1024_v1/', filename)
+            local_file = os.path.join('./checkpoints/base_512_v2/', filename)
 
             if not os.path.exists(local_file):
-                hf_hub_download(repo_id=REPO_ID, filename=filename, local_dir='./checkpoints/base_1024_v1/', local_dir_use_symlinks=False)
+                hf_hub_download(repo_id=REPO_ID, filename=filename, local_dir='./checkpoints/base_512_v2/', local_dir_use_symlinks=False)
 
     
 if __name__ == '__main__':
