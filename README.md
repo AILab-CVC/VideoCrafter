@@ -71,6 +71,8 @@ Click the GIF to access the high-resolution video.
 ---
 
 ## 📝 Changelog
+- __[2024.01.26]__: 🔥🔥 Release the 512x320 checkpoint of VideoCrafter2. 
+
 - __[2024.01.18]__: 🔥🔥 Release the [VideoCrafter2](https://ailab-cvc.github.io/videocrafter2/) and [Tech Report](https://arxiv.org/abs/2401.09047)!
 
 - __[2023.10.30]__: Release [VideoCrafter1](https://arxiv.org/abs/2310.19512) Technical Report!
