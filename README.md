@@ -10,6 +10,7 @@
 
 ### 🔥🔥 The VideoCrafter2 Large improvements over VideoCrafter1 with limited data. Better Motion, Better Concept Combination!!!
 
+### 🔥🔥 A dedicated high-resolution image-to-video (I2V) model [DynamiCrafter](https://github.com/Doubiiu/DynamiCrafter) is released: Better Dynamic, Higher Resolution, Stronger Coherence!!!
 
 Please Join us and create your own film on [Discord/Floor33](https://discord.gg/rrayYqZ4tf).
 
@@ -67,6 +68,7 @@ Click the GIF to access the high-resolution video.
 
 </table >
 
+:boom: **You are highly recommended to try our latest I2V model [DynamiCrafter](https://github.com/Doubiiu/DynamiCrafter). 
 
 ---
 
