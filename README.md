@@ -7,10 +7,9 @@
 <a href='https://huggingface.co/spaces/VideoCrafter/VideoCrafter2'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-blue'></a>
 [![GitHub](https://img.shields.io/github/stars/VideoCrafter/VideoCrafter?style=social)](https://github.com/VideoCrafter/VideoCrafter)
 
+### 🔥🔥 Our dedicated high-resolution I2V model is released at: :point_right:[DynamiCrafter](https://github.com/Doubiiu/DynamiCrafter)!!!
 
 ### 🔥🔥 The VideoCrafter2 Large improvements over VideoCrafter1 with limited data. Better Motion, Better Concept Combination!!!
-
-### 🔥🔥 A dedicated high-resolution image-to-video (I2V) model [DynamiCrafter] is released at: [Link](https://github.com/Doubiiu/DynamiCrafter)
 
 Please Join us and create your own film on [Discord/Floor33](https://discord.gg/rrayYqZ4tf).
 
@@ -68,7 +67,7 @@ Click the GIF to access the high-resolution video.
 
 </table >
 
-:boom: **You are highly recommended to try our dedicated I2V model [DynamiCrafter](https://github.com/Doubiiu/DynamiCrafter).**
+:boom: **You are highly recommended to try our dedicated I2V model [DynamiCrafter](https://github.com/Doubiiu/DynamiCrafter): Higher resolution, Better Dynamics, More Coherence!!!**
 
 ---
 
