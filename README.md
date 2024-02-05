@@ -9,12 +9,13 @@
 
 ### 🔥🔥 Our dedicated high-resolution I2V model is released at: :point_right:[DynamiCrafter](https://github.com/Doubiiu/DynamiCrafter)!!!
 
-### 🔥🔥 The VideoCrafter2 Large improvements over VideoCrafter1 with limited data. Better Motion, Better Concept Combination!!!
+[![](https://img.youtube.com/vi/0NfmIsNAg-g/0.jpg)](https://www.youtube.com/watch?v=0NfmIsNAg-g)
+
+### 🔥The VideoCrafter2 Large improvements over VideoCrafter1 with limited data. Better Motion, Better Concept Combination!!!
 
 Please Join us and create your own film on [Discord/Floor33](https://discord.gg/rrayYqZ4tf).
 
-------
-### 🎥 Exquisite film, produced by VideoCrafter2, directed by Human
+##### 🎥 Exquisite film, produced by VideoCrafter2, directed by Human
  [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/TUsFkW0tK-s/0.jpg)](https://www.youtube.com/watch?v=TUsFkW0tK-s)
  
 ## 🔆 Introduction
@@ -72,13 +73,15 @@ Click the GIF to access the high-resolution video.
 ---
 
 ## 📝 Changelog
-- __[2024.01.26]__: 🔥🔥 Release the 512x320 checkpoint of VideoCrafter2. 
+- __[2024.02.05]__: 🔥🔥 Release new I2V model with the resolution of 640x1024 of VideoCrafter1/DynamiCrafter. 
 
-- __[2024.01.18]__: 🔥🔥 Release the [VideoCrafter2](https://ailab-cvc.github.io/videocrafter2/) and [Tech Report](https://arxiv.org/abs/2401.09047)!
+- __[2024.01.26]__: Release the 512x320 checkpoint of VideoCrafter2. 
+
+- __[2024.01.18]__: Release the [VideoCrafter2](https://ailab-cvc.github.io/videocrafter2/) and [Tech Report](https://arxiv.org/abs/2401.09047)!
 
 - __[2023.10.30]__: Release [VideoCrafter1](https://arxiv.org/abs/2310.19512) Technical Report!
 
-- __[2023.10.13]__: 🔥🔥 Release the VideoCrafter1, High Quality Video Generation!
+- __[2023.10.13]__: Release the VideoCrafter1, High Quality Video Generation!
 
 - __[2023.08.14]__: Release a new version of VideoCrafter on [Discord/Floor33](https://discord.gg/uHaQuThT). Please join us to create your own film!
 
@@ -98,6 +101,7 @@ Click the GIF to access the high-resolution video.
 
 |I2V-Models|Resolution|Checkpoints|
 |:---------|:---------|:--------|
+|VideoCrafter1|640x1024|[Hugging Face](https://huggingface.co/Doubiiu/DynamiCrafter_1024/blob/main/model.ckpt)
 |VideoCrafter1|320x512|[Hugging Face](https://huggingface.co/VideoCrafter/Image2Video-512/blob/main/model.ckpt)
 
 
