@@ -17,6 +17,8 @@ model:
     scale_factor: 0.18215
     use_ema: false
     uncond_type: empty_seq
+    use_scale: true
+    scale_b: 0.7
     unet_config:
       target: lvdm.modules.networks.openaimodel3d.UNetModel
       params:
@@ -38,13 +40,14 @@ model:
         context_dim: 1024
         use_linear: true
         use_checkpoint: true
-        temporal_conv: false
+        temporal_conv: true
         temporal_attention: true
         temporal_selfatt_only: true
-        use_relative_position: true
+        use_relative_position: false
         use_causal_attention: false
         temporal_length: 16
         addition_attention: true
+        fps_cond: true
     first_stage_config:
       target: lvdm.models.autoencoder.AutoencoderKL
       params:
