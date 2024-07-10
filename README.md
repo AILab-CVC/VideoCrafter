@@ -4,7 +4,7 @@
 <a href='https://ailab-cvc.github.io/videocrafter2/'><img src='https://img.shields.io/badge/Project-Page-green'></a> 
 <a href='https://arxiv.org/abs/2401.09047'><img src='https://img.shields.io/badge/Technique-Report-red'></a> 
 [![Discord](https://dcbadge.vercel.app/api/server/rrayYqZ4tf?style=flat)](https://discord.gg/rrayYqZ4tf)
-<a href='https://huggingface.co/spaces/VideoCrafter/VideoCrafter2'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-blue'></a>
+<a href='https://huggingface.co/spaces/VideoCrafter/VideoCrafter'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-blue'></a>
 [![GitHub](https://img.shields.io/github/stars/VideoCrafter/VideoCrafter?style=social)](https://github.com/VideoCrafter/VideoCrafter)
 
 ### 🔥🔥 Our dedicated high-resolution I2V model is released at: :point_right:[DynamiCrafter](https://github.com/Doubiiu/DynamiCrafter)!!!
