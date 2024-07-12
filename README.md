@@ -142,7 +142,7 @@ pip install -r requirements.txt
 ```
 
 ---
-## 📋 Techinical Report
+## 📋 Technical Report
 😉 VideoCrafter2 Tech report: [VideoCrafter2: Overcoming Data Limitations for High-Quality Video Diffusion Models](https://arxiv.org/abs/2401.09047)
 
 😉 VideoCrafter1 Tech report: [VideoCrafter1: Open Diffusion Models for High-Quality Video Generation](https://arxiv.org/abs/2310.19512)
