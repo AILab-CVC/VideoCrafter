@@ -43,7 +43,7 @@ class DDPM(pl.LightningModule):
                  beta_schedule="linear",
                  loss_type="l2",
                  ckpt_path=None,
-                 ignore_keys=[],
+                 ignore_keys=None,
                  load_only_unet=False,
                  monitor=None,
                  use_ema=True,
@@ -67,6 +67,8 @@ class DDPM(pl.LightningModule):
                  logvar_init=0.
                  ):
         super().__init__()
+        if ignore_keys is None:
+            ignore_keys = []
         assert parameterization in ["eps", "x0"], 'currently only supporting "eps" and "x0"'
         self.parameterization = parameterization
         mainlogger.info(f"{self.__class__.__name__}: Running in {self.parameterization}-prediction mode")
@@ -156,13 +158,13 @@ class DDPM(pl.LightningModule):
             lvlb_weights = self.betas ** 2 / (
                         2 * self.posterior_variance * to_torch(alphas) * (1 - self.alphas_cumprod))
         elif self.parameterization == "x0":
-            lvlb_weights = 0.5 * np.sqrt(torch.Tensor(alphas_cumprod)) / (2. * 1 - torch.Tensor(alphas_cumprod))
+            lvlb_weights = 0.5 * np.sqrt(torch.Tensor(alphas_cumprod)) / (2. * (1 - torch.Tensor(alphas_cumprod)))
         else:
             raise NotImplementedError("mu not supported")
         # TODO how to choose this term
         lvlb_weights[0] = lvlb_weights[1]
         self.register_buffer('lvlb_weights', lvlb_weights, persistent=False)
-        assert not torch.isnan(self.lvlb_weights).all()
+        assert not torch.isnan(self.lvlb_weights).any()
 
     @contextmanager
     def ema_scope(self, context=None):
@@ -179,7 +181,9 @@ class DDPM(pl.LightningModule):
                 if context is not None:
                     mainlogger.info(f"{context}: Restored training weights")
 
-    def init_from_ckpt(self, path, ignore_keys=list(), only_model=False):
+    def init_from_ckpt(self, path, ignore_keys=None, only_model=False):
+        if ignore_keys is None:
+            ignore_keys = []
         sd = torch.load(path, map_location="cpu")
         if "state_dict" in list(sd.keys()):
             sd = sd["state_dict"]

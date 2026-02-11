@@ -77,7 +77,9 @@ class AutoencoderKL(pl.LightningModule):
         self.decodes = []
         self.save_decode_samples = 2048
 
-    def init_from_ckpt(self, path, ignore_keys=list()):
+    def init_from_ckpt(self, path, ignore_keys=None):
+        if ignore_keys is None:
+            ignore_keys = []
         sd = torch.load(path, map_location="cpu")
         try:
             self._cur_epoch = sd['epoch']
