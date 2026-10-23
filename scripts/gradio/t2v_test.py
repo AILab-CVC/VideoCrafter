@@ -5,6 +5,7 @@ import torch
 from scripts.evaluation.funcs import load_model_checkpoint, save_videos, batch_ddim_sampling
 from utils.utils import instantiate_from_config
 from huggingface_hub import hf_hub_download
+from scripts.gradio.output_filename import make_video_filename
 
 class Text2Video():
     def __init__(self,result_dir='./tmp/',gpu_num=1) -> None:
@@ -50,14 +51,12 @@ class Text2Video():
         ## inference
         batch_samples = batch_ddim_sampling(model, cond, noise_shape, n_samples=1, ddim_steps=steps, ddim_eta=eta, cfg_scale=cfg_scale)
         ## b,samples,c,t,h,w
-        prompt_str = prompt.replace("/", "_slash_") if "/" in prompt else prompt
-        prompt_str = prompt_str.replace(" ", "_") if " " in prompt else prompt_str
-        prompt_str=prompt_str[:30]
+        output_name = make_video_filename(prompt)
 
-        save_videos(batch_samples, self.result_dir, filenames=[prompt_str], fps=self.save_fps)
-        print(f"Saved in {prompt_str}. Time used: {(time.time() - start):.2f} seconds")
+        save_videos(batch_samples, self.result_dir, filenames=[output_name], fps=self.save_fps)
+        print(f"Saved in {output_name}. Time used: {(time.time() - start):.2f} seconds")
         model=model.cpu()
-        return os.path.join(self.result_dir, f"{prompt_str}.mp4")
+        return os.path.join(self.result_dir, f"{output_name}.mp4")
     
     def download_model(self):
         REPO_ID = 'VideoCrafter/VideoCrafter2'
