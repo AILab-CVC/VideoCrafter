@@ -124,6 +124,8 @@ def load_video_batch(filepath_list, frame_stride, video_size=(256,256), video_fr
     fps_list = []
     batch_tensor = []
     assert frame_stride > 0, "valid frame stride should be a positive interge!"
+    if video_frames < 0:
+        frame_stride = 1
     for filepath in filepath_list:
         padding_num = 0
         vidreader = VideoReader(filepath, ctx=cpu(0), width=video_size[1], height=video_size[0])
@@ -133,7 +135,6 @@ def load_video_batch(filepath_list, frame_stride, video_size=(256,256), video_fr
         if video_frames < 0:
             ## all frames are collected: fs=1 is a must
             required_frames = total_frames
-            frame_stride = 1
         else:
             required_frames = video_frames
         query_frames = min(required_frames, max_valid_frames)
